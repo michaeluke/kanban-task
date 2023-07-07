@@ -11,7 +11,8 @@ import { SetCurrentBoard } from '../store/boards/BoardSlice'
  const BoardView = () => {
 
   const [curr_board, setCurrBoard] = useState<Board | any>(null);
-  // const[first_time , setfirsttime] = useState(false);
+
+  const [isFirstRender, setIsFirstRender] = useState(true);
 
     const dispatch = useDispatch();
 
@@ -29,39 +30,40 @@ import { SetCurrentBoard } from '../store/boards/BoardSlice'
 
 
    
-    //viewfirst board 
+    // //viewfirst board 
     useEffect(()=>{
 
-      if(Boards.length>0){
-      
+   
+      if(Boards.length>0 && isFirstRender){
+    
         setCurrBoard(Boards[0])
     
-      
-      
-        // dispatch(SetCurrentBoard(curr_board))
-       
         Get_Current_Board(curr_board)
-        View_Current_Board(curr_board);
-       //  Get_Current_Board(curr_board)
-       //  dispatch(ClearTasks())
-    
-       }
-  
       
+        View_Current_Board(curr_board)
+        // dispatch(ClearTasks())
+    
+       
+       }
+
+     
+    
     },[curr_board])
   
 
     //getting tasks in each column in the Board.
     useEffect(() => {
-     
+
     
       if(Array.isArray(CurrentColumns)){
+        
         CurrentColumns.forEach((column: any) => {
              
           Get_Tasks_In_A_List(column.id);
 
          });;
       }
+    
       }, [CurrentColumns]);
 
    
@@ -71,8 +73,8 @@ import { SetCurrentBoard } from '../store/boards/BoardSlice'
       //create a combined array to connect between the columns and the cards.
       useEffect(()=>{
        
+        
         if(Array.isArray(CurrentColumns) && Array.isArray(Tasks) ){
-
 
         const columns_tasks = CurrentColumns.map((column: any) => ({
           ...column,
@@ -90,7 +92,6 @@ import { SetCurrentBoard } from '../store/boards/BoardSlice'
     //taskadded is just a boolean in the state that is triggered each time the user submits a new task in order to re-render this component.
     useEffect(()=>{
      
- 
     View_Current_Board(CurrentBoard)
      
     dispatch(ClearTasks())

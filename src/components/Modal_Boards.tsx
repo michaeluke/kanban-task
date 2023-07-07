@@ -8,7 +8,7 @@ import {addBoard} from "../store/boards/BoardSlice"
 import { createBoardAsync } from "../store/boards/BoardAction";
 import { createColumn } from "../store/boards/BoardAction";
 import { GetBoardsAsync } from "../store/boards/BoardAction";
-import { ClearlastBoard } from "../store/boards/BoardSlice";
+
 interface Item {
   name: string;
 }
@@ -25,7 +25,6 @@ export default function BoardsModal() {
 
 
 
-  const lastaddedBoard = useSelector((state: RootState) => state.Boards.lastaddedBoard)
   
   const Boards = useSelector((state: RootState) => state.Boards.boards_array)
 

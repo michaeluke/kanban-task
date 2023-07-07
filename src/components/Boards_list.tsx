@@ -42,7 +42,7 @@ export default function BoardsList(){
   
       // dispatch(Setboardselected(true))
       //in order not to duplicate tasks.
-      // dispatch(ClearTasks())
+      dispatch(ClearTasks())
 
   }
   
