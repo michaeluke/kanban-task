@@ -46,4 +46,21 @@ button {
 * {
   box-sizing: border-box;
   font-family: "Plus Jakarta Sans";
+}
+
+.add-col-btn {
+  border: none;
+  align-items: center;
+  background: #635fc7;
+  border-radius: 24px;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  margin-right: 16px;
+  padding: 10px 18px;
+}
+
+.empty {
+  color: #828FA3;
+  font-weight: 800;
 }/*# sourceMappingURL=Header.css.map */

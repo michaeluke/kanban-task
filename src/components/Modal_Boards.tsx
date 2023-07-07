@@ -8,6 +8,7 @@ import {addBoard} from "../store/boards/BoardSlice"
 import { createBoardAsync } from "../store/boards/BoardAction";
 import { createColumn } from "../store/boards/BoardAction";
 import { GetBoardsAsync } from "../store/boards/BoardAction";
+import { BoardEmpty } from "../store/boards/BoardSlice";
 
 interface Item {
   name: string;
@@ -16,7 +17,6 @@ interface Item {
 export default function BoardsModal() {
   const [items, setItems] = useState<Item[]>([{ name: 'column' }]);
 
-  const [heads_up, setEvent] = useState(false);
   const [first_time, setfirsttime] = useState(false)
   const dispatch = useDispatch();
   const { register, handleSubmit  , reset, formState: { errors }, unregister} = useForm();
@@ -59,7 +59,7 @@ export default function BoardsModal() {
     await createBoardAsync(boardname);
 
    
-    // setarr(lastaddedBoard)
+
 
   
     
@@ -80,7 +80,8 @@ export default function BoardsModal() {
     const lastBoard = Boards[Boards.length-1];
     // setarr(lastBoard)
     debugger
-    if(array_state && lastBoard){
+    //here
+    if(array_state.length>0 && lastBoard){
   
       debugger
     
@@ -94,9 +95,21 @@ export default function BoardsModal() {
   
       ))
   
-  
+      // dispatch(BoardEmpty(false))
       dispatch(hide_modal())
       }
+
+      else{
+        dispatch(hide_modal())
+      }
+
+      // //if there's no column added
+      // else{
+
+      //   dispatch(BoardEmpty(true))
+      //   dispatch(hide_modal())
+
+      // }
     }
      
   }

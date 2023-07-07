@@ -7,7 +7,8 @@ import { set_combinedarray } from '../store/boards/BoardSlice'
 import { ClearTasks } from '../store/boards/BoardSlice'
 import { Board } from '../store/boards/BoardSlice'
 import { Get_Current_Board } from '../store/boards/BoardAction'
-import { SetCurrentBoard } from '../store/boards/BoardSlice'
+import EmptyBoard from './EmptyBoard'
+
  const BoardView = () => {
 
   const [curr_board, setCurrBoard] = useState<Board | any>(null);
@@ -29,7 +30,8 @@ import { SetCurrentBoard } from '../store/boards/BoardSlice'
     const Boards =   useSelector((state: RootState) => state.Boards.boards_array)
 
 
-   
+    const BoardEmpty = useSelector((state: RootState) => state.Boards.BoardEmpty)
+
     // //viewfirst board 
     useEffect(()=>{
 
@@ -131,6 +133,18 @@ import { SetCurrentBoard } from '../store/boards/BoardSlice'
 
         ))}    
           </div>
+ 
+
+ {CombinedArray.length ==0  &&
+
+
+      <EmptyBoard/>
+ 
+ 
+ 
+ 
+ 
+ }
        
         </>
     )

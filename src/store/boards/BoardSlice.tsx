@@ -21,6 +21,7 @@ export interface BoardState {
   empty: null ;
 
   anyBoardSelected : boolean
+  BoardEmpty : boolean
 }
 
 export interface Board {
@@ -61,6 +62,7 @@ const initialState: BoardState = {
     empty:null,
     anyBoardSelected: false,
     first_columns :[],
+    BoardEmpty : false,
 }
 
 export const BoardSlice = createSlice({
@@ -153,6 +155,14 @@ export const BoardSlice = createSlice({
   
       },
 
+    BoardEmpty: (state , action) => {
+   
+    
+        state.BoardEmpty = action.payload
+         
+    
+      },
+
    
   },
 })
@@ -160,6 +170,6 @@ export const BoardSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { show_modal, hide_modal , show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , Setboardselected , SettColumnfirsttime} = BoardSlice.actions
+export const { show_modal, hide_modal , show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , Setboardselected , SettColumnfirsttime , BoardEmpty} = BoardSlice.actions
 
 export default BoardSlice.reducer
