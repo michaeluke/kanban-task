@@ -1,0 +1,7 @@
+.Board .column {
+  min-width: 280px;
+  gap: 20px;
+}
+.Board .column .card {
+  margin-right: 40px;
+}/*# sourceMappingURL=Board.css.map */

@@ -1,0 +1,83 @@
+:root {
+  --side_colors: "#E4EBFA";
+  --text-color: black;
+}
+
+.parent_switch {
+  background-color: var(--side_colors);
+  justify-content: center;
+  padding: 10px;
+  margin-inline: 6%;
+  align-items: center;
+}
+.parent_switch .switch {
+  position: relative;
+  width: 60px;
+  height: 34px;
+  cursor: pointer;
+}
+.parent_switch .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: whitesmoke;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+.parent_switch .slider:before {
+  position: absolute;
+  cursor: pointer;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: #5964E0;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+.parent_switch input:checked + .slider {
+  background-color: whitesmoke;
+}
+.parent_switch input:checked + .slider:before {
+  transform: translateX(26px);
+}
+.parent_switch .switch input {
+  opacity: 0;
+}
+
+.sidebar-btn-parent {
+  text-align: start;
+  padding-left: 10px;
+}
+.sidebar-btn-parent .sidebar-btn {
+  border: none;
+}
+
+.external-btn {
+  border-top-right-radius: 40%;
+  border-bottom-right-radius: 40%;
+}
+
+.create {
+  color: #5964E0;
+}
+
+.dash-icon {
+  margin-right: 10px;
+}
+
+.add_board {
+  cursor: pointer;
+}
+
+.add_board:hover {
+  background-color: #F4F7FD;
+}
+
+div:not(.create) {
+  color: var(--text-color);
+}/*# sourceMappingURL=Toggler.css.map */

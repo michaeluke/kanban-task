@@ -1,0 +1,33 @@
+.modal-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: fixed;
+    height:100%;
+    width:100%;
+    z-index: 9999;
+    top:0;
+    left:0;
+
+    .modal{
+
+    display: block !important;
+        
+        p{
+            color: red;
+        }
+
+
+        .parent-col{
+
+            margin-bottom: 20px;
+
+            .x-icon{
+
+                cursor: pointer;
+                padding-left: 20px;
+            }
+        }
+       
+    }
+  }
+
+

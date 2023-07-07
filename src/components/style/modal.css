@@ -1,0 +1,22 @@
+.modal-overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+}
+.modal-overlay .modal {
+  display: block !important;
+}
+.modal-overlay .modal p {
+  color: red;
+}
+.modal-overlay .modal .parent-col {
+  margin-bottom: 20px;
+}
+.modal-overlay .modal .parent-col .x-icon {
+  cursor: pointer;
+  padding-left: 20px;
+}/*# sourceMappingURL=modal.css.map */
