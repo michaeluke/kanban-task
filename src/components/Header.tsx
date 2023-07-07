@@ -11,7 +11,7 @@ import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Delete_Board } from '../store/boards/BoardAction';
 import { show_task_modal } from '../store/boards/BoardSlice';
-
+import { Setboardselected } from '../store/boards/BoardSlice';
 const Header = (props: { open: boolean }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -37,6 +37,7 @@ const Header = (props: { open: boolean }) => {
   const handleDelete = () =>{
 
     Delete_Board(Current_Board)
+    dispatch(Setboardselected(false))
 
   }
 

@@ -15,10 +15,12 @@ export interface BoardState {
   show_tasks_modal: boolean,
   Combinedarray : object[],
   event: boolean,
-
+  first_columns :object[],
   lastaddedBoard:  Board |null ;
   
   empty: null ;
+
+  anyBoardSelected : boolean
 }
 
 export interface Board {
@@ -58,6 +60,8 @@ const initialState: BoardState = {
     event : false,
     lastaddedBoard: null,
     empty:null,
+    anyBoardSelected: false,
+    first_columns :[],
 }
 
 export const BoardSlice = createSlice({
@@ -116,6 +120,13 @@ export const BoardSlice = createSlice({
 
     },
 
+
+    SettColumnfirsttime: (state,action) => {
+
+      state.first_columns = action.payload;
+
+    },
+
     SetTasks: (state,action) => {
    
     
@@ -138,6 +149,14 @@ export const BoardSlice = createSlice({
       state.event = !state.event;
     },
 
+    Setboardselected: (state , action) => {
+   
+    
+      state.anyBoardSelected = action.payload
+       
+  
+      },
+
    
   },
 })
@@ -145,6 +164,6 @@ export const BoardSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { show_modal, hide_modal , show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , ClearlastBoard} = BoardSlice.actions
+export const { show_modal, hide_modal , show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , ClearlastBoard , Setboardselected , SettColumnfirsttime} = BoardSlice.actions
 
 export default BoardSlice.reducer

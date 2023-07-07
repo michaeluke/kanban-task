@@ -1,6 +1,6 @@
 import {createBoard} from "../../api/trelloapi";
 import { Get_Boards } from "../../api/trelloapi";
-import { Board, SetTasks, addBoard } from "./BoardSlice";
+import { Board, SetTasks, SettColumnfirsttime, addBoard } from "./BoardSlice";
 import { store } from '../store';
 import { GetBoards } from "./BoardSlice";
 import { SetCurrentBoard } from "./BoardSlice";
@@ -74,7 +74,7 @@ export const Get_Current_Board = (board:Board|null) => {
 
  console.log(board)
 
-  
+
   store.dispatch(SetCurrentBoard(board))
 
 
@@ -100,6 +100,7 @@ export const View_Current_Board = (board:Board|null) => {
 }
  
  }
+
 
 
  //delete selected board

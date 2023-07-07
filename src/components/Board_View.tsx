@@ -1,12 +1,17 @@
-import React ,{useEffect} from 'react' 
+import React ,{useEffect, useState} from 'react' 
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../store/store'
 import './style/Board.css'
 import { Get_Tasks_In_A_List, View_Current_Board } from '../store/boards/BoardAction'
 import { set_combinedarray } from '../store/boards/BoardSlice'
 import { ClearTasks } from '../store/boards/BoardSlice'
+import { Board } from '../store/boards/BoardSlice'
+import { Get_Current_Board } from '../store/boards/BoardAction'
+import { SetCurrentBoard } from '../store/boards/BoardSlice'
  const BoardView = () => {
 
+  const [curr_board, setCurrBoard] = useState<Board | any>(null);
+  // const[first_time , setfirsttime] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -20,11 +25,36 @@ import { ClearTasks } from '../store/boards/BoardSlice'
 
     const taskadded =   useSelector((state: RootState) => state.Boards.event)
 
+    const Boards =   useSelector((state: RootState) => state.Boards.boards_array)
 
 
+   
+    //viewfirst board 
+    useEffect(()=>{
+
+      if(Boards.length>0){
+      
+        setCurrBoard(Boards[0])
+    
+      
+      
+        // dispatch(SetCurrentBoard(curr_board))
+       
+        Get_Current_Board(curr_board)
+        View_Current_Board(curr_board);
+       //  Get_Current_Board(curr_board)
+       //  dispatch(ClearTasks())
+    
+       }
+  
+      
+    },[curr_board])
+  
 
     //getting tasks in each column in the Board.
     useEffect(() => {
+     
+    
       if(Array.isArray(CurrentColumns)){
         CurrentColumns.forEach((column: any) => {
              
@@ -34,11 +64,13 @@ import { ClearTasks } from '../store/boards/BoardSlice'
       }
       }, [CurrentColumns]);
 
+   
+
 
 
       //create a combined array to connect between the columns and the cards.
       useEffect(()=>{
-     
+       
         if(Array.isArray(CurrentColumns) && Array.isArray(Tasks) ){
 
 
@@ -51,7 +83,7 @@ import { ClearTasks } from '../store/boards/BoardSlice'
       }
 
       
-    },[CurrentColumns, Tasks])
+    },[CurrentColumns , Tasks ])
 
 
 

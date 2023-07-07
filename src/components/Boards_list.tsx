@@ -12,21 +12,23 @@ import { Get_Current_Board } from '../store/boards/BoardAction';
 import { View_Current_Board } from '../store/boards/BoardAction';
 import { Board } from '../store/boards/BoardSlice';
 import { ClearTasks } from '../store/boards/BoardSlice';
-
+import { Setboardselected } from '../store/boards/BoardSlice';
 export default function BoardsList(){
 
   const dispatch = useDispatch();
+  var curr_board : Board | null | any ;
 
+  const Boards = useSelector((state: RootState) => state.Boards.boards_array)
+  const Tasks = useSelector((state: RootState) => state.Boards.tasks)
   useEffect(()=>{
 
     GetBoardsAsync();
 
+    
   },[])
 
 
-  const Boards = useSelector((state: RootState) => state.Boards.boards_array)
-  const Tasks = useSelector((state: RootState) => state.Boards.tasks)
-
+  
 
 
 //upon clicking on a board fetch api for selected board and view it.
@@ -38,10 +40,9 @@ export default function BoardsList(){
       Get_Current_Board(board)
       View_Current_Board(board);
   
+      // dispatch(Setboardselected(true))
       //in order not to duplicate tasks.
-      dispatch(ClearTasks())
-
-  
+      // dispatch(ClearTasks())
 
   }
   

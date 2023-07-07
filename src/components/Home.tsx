@@ -1,4 +1,4 @@
-import React from 'react' 
+import React , {useEffect}from 'react' 
 import Header from './Header'
 import Sidebar from './Siderbar'
 import BoardView from './Board_View'
@@ -6,12 +6,21 @@ import BoardsModal from './Modal_Boards'
 import type { RootState } from '../store/store'
 import { useSelector, useDispatch } from 'react-redux'
 import TasksModal from './Modal_Tasks'
+import EmptyBoard from './EmptyBoard'
+import { SetCurrentBoard } from '../store/boards/BoardSlice'
  const Home = (): JSX.Element => {
 
+
+    const dispatch  = useDispatch()
 
     const Modal_Boards = useSelector((state: RootState) => state.Boards.show_boards_modal)
 
     const Modal_Tasks = useSelector((state: RootState) => state.Boards.show_tasks_modal)
+
+    // const boardSelected = useSelector((state: RootState) => state.Boards.anyBoardSelected)
+
+    const Boards = useSelector((state: RootState) => state.Boards.boards_array)
+   
 
     return(
 
@@ -20,7 +29,7 @@ import TasksModal from './Modal_Tasks'
         <Sidebar>
         {Modal_Boards ? <BoardsModal/> : null}
        
-         <BoardView/>
+        {Boards.length>0? <BoardView/> : <EmptyBoard/>}
          
          {Modal_Tasks ? <TasksModal/> : null}
         </Sidebar>
