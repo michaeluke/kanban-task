@@ -9,8 +9,9 @@ import { createBoardAsync } from "../store/boards/BoardAction";
 import { createColumn } from "../store/boards/BoardAction";
 import { GetBoardsAsync } from "../store/boards/BoardAction";
 import { BoardEmpty } from "../store/boards/BoardSlice";
-
+import { nanoid } from 'nanoid';
 interface Item {
+  id: string
   name: string;
 }
 
@@ -20,6 +21,7 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
  
 
   const [first_time, setfirsttime] = useState(false)
+  const [first, setfirst] = useState(true)
   const dispatch = useDispatch();
   
   const SelectedBoard = useSelector((state: RootState) => state.Boards.Current_board)
@@ -30,6 +32,7 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
 
 //   const Boards = useSelector((state: RootState) => state.Boards.boards_array)
 
+    const [deletedIndex, setDeletedIndex] = useState(null);
 
   const ColumnsofBoard = useSelector((state: RootState) => state.Boards.Current_columns)
   var columnsarray: any[] = [];
@@ -50,17 +53,18 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
   },[ColumnsofBoard])
 
   useEffect(() => {
+ 
     if(SelectedBoard){
 
         setValue('boardName' , SelectedBoard.name); 
+        setfirst(false)
     }
 
     if(ColumnsofBoard){
 
         ColumnsofBoard.forEach((column:any , index:any)=>{
-            setValue(`column${index}`, column.name);
-
-            
+            setValue(column.id, column.name);
+            setfirst(false)
         })
     }
 
@@ -73,7 +77,8 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
     // console.log( values_array + "ok" )
 
      
-      for(var i = 1 ; i < values_array.length ;i++){
+    //2 to skip first the boardname [0] and [1] unique id doesnt have a value.
+      for(var i = 2 ; i < values_array.length ;i++){
 
       columnsarray.push(values_array[i]);
 
@@ -91,46 +96,45 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
   };
 
   
- useEffect(()=>{
+//  useEffect(()=>{
  
-  const go =()=>{
+//   const go =()=>{
 
-    if(first_time){
+//     if(first_time){
  
     
-    // setarr(lastBoard)
-    debugger
-    //here
-    if(array_state.length>0 && SelectedBoard){
+//     // setarr(lastBoard)
+//     debugger
+//     //here
+//     if(array_state.length>0 && SelectedBoard){
   
-      debugger
+//       debugger
     
-      //call on create column
-      array_state?.map((column_name:any) => (
+//       //call on create column
+//       array_state?.map((column_name:any) => (
        
     
         
-        createColumn(SelectedBoard, column_name)
+//         createColumn(SelectedBoard, column_name)
         
   
-      ))
+//       ))
   
-      // dispatch(BoardEmpty(false))
-      dispatch(hide_editboardmodal());
-      }
+//       // dispatch(BoardEmpty(false))
+//       dispatch(hide_editboardmodal());
+//       }
 
-      else{
-        dispatch(hide_editboardmodal());
-      }
-    }
+//       else{
+//         dispatch(hide_editboardmodal());
+//       }
+//     }
      
-  }
+//   }
 
-  go();
+//   go();
 
- },[onSubmit])
+//  },[onSubmit])
     
-
 
 
 
@@ -154,23 +158,25 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
   
   const addcolumn = () =>{
 
+    
+
     const newItem: Item | any = {  };
     setItems([...items, newItem]);
 
   }
-  const handle_delete = (index:any) =>{
 
-    setItems((prevItems:any) => {
-      const updatedItems = [...prevItems];
-      updatedItems.splice(index, 1);
-      return updatedItems;
-    });
+  const handle_delete = (id:any) =>{
 
+    setItems((prevItems: any) => {
+        const updatedItems = [...prevItems].filter((item: any) => item.id !== id);
+        unregister(id);
+        return updatedItems;
 
-    
-    unregister(`column${index}`)
-  debugger
+      });
+
   }
+
+
 
   function editboardname(newbardname:any) {
     var newValue = newbardname;
@@ -204,6 +210,7 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
 
 
                     <label htmlFor="boardName">Board Name:</label>  <br/>
+                   
                     <input
                       {...register("boardName", {required: 'Board Name is required'})}
                       type="text"
@@ -224,19 +231,23 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
                         <div className="parent-col d-flex align-items-center" key={index}>
 
                             <div>
+                         
+                            <>
                             <input
-                            {...register(`column${index}` , {required: 'Column Name is required'})}
+                            {...register(item.id || (item.id = nanoid()), { required: 'Column Name is required' })}
                             type="text"
                             id="boardName"
                             autoComplete="off"
                             defaultValue={item.name}
                             onChange={(e) => handleChange(e, index)}
                             /> <br/>
-                          
+                                
                             {errors.item && <p>{errors.item.message  as React.ReactNode}</p>}
+                            </>
+                         
                             </div>
 
-                            <span className="x-icon"  onClick={(e) => handle_delete(index)}>&#x2716;</span>
+                            <span className="x-icon"  onClick={(e) => handle_delete(item.id)}>&#x2716;</span>
 
 
                         </div>

@@ -124,6 +124,9 @@ export default function BoardsModal() {
   }
   const handle_delete = (index:any) =>{
 
+
+    unregister(`column${index}`)
+    
     setItems((prevItems) => {
       const updatedItems = [...prevItems];
       updatedItems.splice(index, 1);
@@ -131,7 +134,7 @@ export default function BoardsModal() {
     });
 
 
-    unregister(`column${index}`)
+  
   
   }
 
