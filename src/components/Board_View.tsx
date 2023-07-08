@@ -2,8 +2,8 @@ import React ,{useEffect, useState} from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../store/store'
 import './style/Board.css'
-import { Get_Tasks_In_A_List, View_Current_Board } from '../store/boards/BoardAction'
-import { set_combinedarray } from '../store/boards/BoardSlice'
+import { Get_Tasks_In_A_List, Select_Task, View_Current_Board } from '../store/boards/BoardAction'
+import { set_combinedarray, show_editTaskmodal } from '../store/boards/BoardSlice'
 import { ClearTasks } from '../store/boards/BoardSlice'
 import { Board } from '../store/boards/BoardSlice'
 import { Get_Current_Board } from '../store/boards/BoardAction'
@@ -101,6 +101,13 @@ import EmptyBoard from './EmptyBoard'
     },[taskadded])
 
 
+    const handletaskedit = (task:any)=>{
+
+
+      Select_Task(task.id)
+      // dispatch(show_editTaskmodal());
+
+    }
   
     console.log(CurrentBoard)
     return(
@@ -120,7 +127,7 @@ import EmptyBoard from './EmptyBoard'
             {column.tasks && column.tasks?.map((task: any) => (
 
               
-                <div key={task.id} className="card">
+                <div key={task.id} className="card" onClick={(e) => handletaskedit(task)}>
                   <div className="card-body">
                     <h5 className="card-title">{task.name}</h5>
                   </div>

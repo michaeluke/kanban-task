@@ -1,6 +1,6 @@
-import {createBoard} from "../../api/trelloapi";
+import {SelectTask, UpdateTask, createBoard} from "../../api/trelloapi";
 import { Get_Boards } from "../../api/trelloapi";
-import { Board, BoardsCount, SetTasks, SettColumnfirsttime, addBoard } from "./BoardSlice";
+import { Board, BoardsCount, SetLastBoard, SetSelectedTask, SetTasks, SettColumnfirsttime, addBoard, show_editTaskmodal } from "./BoardSlice";
 import { store } from '../store';
 import { GetBoards } from "./BoardSlice";
 import { SetCurrentBoard } from "./BoardSlice";
@@ -13,6 +13,7 @@ import { triggertaskaddedevent } from "./BoardSlice";
 import { create_column } from "../../api/trelloapi";
 import { Update_BoardName } from "../../api/trelloapi";
 import { Delete_Column } from "../../api/trelloapi";
+
 //Creating a board
 export const createBoardAsync = async (boardName: any) => {
     
@@ -20,7 +21,7 @@ export const createBoardAsync = async (boardName: any) => {
     
     await createBoard(boardName)
       .then((newBoard) => {
-      
+        debugger
         store.dispatch(addBoard(newBoard));
       })
       .catch((error) => {
@@ -190,7 +191,8 @@ export const Delete_Board = (board:Board|null) => {
   .then((columns) => {
     console.log("inside column");
     console.log(columns)
-    store.dispatch(SetCurrentColumn(columns))
+    //here fix
+    // store.dispatch(SetCurrentColumn(columns))
     debugger
 
 
@@ -226,11 +228,6 @@ export const Create_Task = (Title:string, Desc: string , Listid:string) => {
       console.error('Failed to add Task:', error);
     });
 
-
-  
-  
-
- 
  }
 
 
@@ -275,4 +272,41 @@ export const Create_Task = (Title:string, Desc: string , Listid:string) => {
 
  }
 
+
+ //select task to edit
+
+ export const Select_Task= (taskid:any)=>{
+
+
+
+  SelectTask(taskid)
+  .then((task) => {
+
+    store.dispatch(SetSelectedTask(task))
+    store.dispatch(show_editTaskmodal())
+ })
+ .catch((error) => {
+  console.error('Failed to get task', error);
+});
+
+}
+
+
+
+  //creating a task in a list
+export const Update_Task = (taskid:string ,Title:string, Desc: string , Listid:string) => {
+
+  
+  UpdateTask(taskid,Title , Desc , Listid)
+ .then(() => {
  
+  //
+   store.dispatch(triggertaskaddedevent())
+   console.log("success added task")
+
+ })
+ .catch((error) => {
+   console.error('Failed to add Task:', error);
+ });
+
+}

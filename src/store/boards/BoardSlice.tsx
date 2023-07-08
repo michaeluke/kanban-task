@@ -23,12 +23,18 @@ export interface BoardState {
   anyBoardSelected : boolean
   BoardEmpty : boolean
   showeditboardmodal :boolean
+
+  showEditTaskModal : boolean
+
+  SelectedTask : Task | any ;
+  lastboard:  Board | null  ;
 }
 
 export interface Board {
   id : string,
   name: string,
 }
+
 
 export interface Column {
   id : string,
@@ -38,14 +44,9 @@ export interface Column {
 export interface Task {
   id : string,
   name: string,
-  idList: string,
 
 }
 
-// export interface Column {
-//   id : string,
-//   name: string,
-// }
 
 
 
@@ -66,6 +67,11 @@ const initialState: BoardState = {
     BoardEmpty : false,
 
     showeditboardmodal : false,
+    showEditTaskModal: false,
+
+    SelectedTask : null,
+
+    lastboard : null
 }
 
 export const BoardSlice = createSlice({
@@ -93,6 +99,13 @@ export const BoardSlice = createSlice({
       },
     hide_editboardmodal: (state) => {
         state.showeditboardmodal = false;
+      },
+
+    show_editTaskmodal: (state) => {
+        state.showEditTaskModal = true;
+      },
+    hide_editTaskmodal: (state) => {
+        state.showEditTaskModal = false;
       },
 
     addBoard: (state, action) => {
@@ -176,7 +189,16 @@ export const BoardSlice = createSlice({
     BoardsCount: (state, action)=>{
 
       state.boards_counter = action.payload
-    }
+    },
+
+    SetSelectedTask: (state, action)=>{
+
+      state.SelectedTask = action.payload;
+    },
+
+    SetLastBoard : (state,action)=>{
+      state.lastboard = action.payload;
+    },
 
    
   },
@@ -185,6 +207,6 @@ export const BoardSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { show_modal, hide_modal , show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , Setboardselected , SettColumnfirsttime , BoardEmpty , BoardsCount , show_editboardmodal, hide_editboardmodal} = BoardSlice.actions
+export const { show_modal, hide_modal , show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , Setboardselected , SettColumnfirsttime , BoardEmpty , BoardsCount , show_editboardmodal, hide_editboardmodal , show_editTaskmodal, hide_editTaskmodal,SetSelectedTask , SetLastBoard} = BoardSlice.actions
 
 export default BoardSlice.reducer

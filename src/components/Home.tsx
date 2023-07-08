@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import TasksModal from './Modal_Tasks'
 import NoBoards from './NoBoards'
 import EditBoard from './EditBoardModal'
+import EditTaskModal from './EditTaskModal'
 
  const Home = (): JSX.Element => {
 
@@ -24,6 +25,7 @@ import EditBoard from './EditBoardModal'
 
     const Boards = useSelector((state: RootState) => state.Boards.boards_array)
 
+    const edittaskmodal = useSelector((state: RootState) => state.Boards.showEditTaskModal)
    
    
 
@@ -39,6 +41,8 @@ import EditBoard from './EditBoardModal'
 
          
         {Modal_Tasks ? <TasksModal/> : null}
+        {edittaskmodal ? <EditTaskModal/> : null}
+        
         </Sidebar>
         
         </>

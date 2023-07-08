@@ -26,6 +26,7 @@ export default function BoardsModal() {
 
   const Boards = useSelector((state: RootState) => state.Boards.boards_array)
 
+  // const lastBoard = useSelector((state: RootState) => state.Boards.lastboard)
   var columnsarray: any[] = [];
 
   const [initial_values , setinitialvalues] = useState(
@@ -39,7 +40,7 @@ export default function BoardsModal() {
     }
 ])
 
-  const onSubmit = async (results:any) => {
+  const onSubmit = async(results:any) => {
 
   const values_array = Object.values(results);
 
@@ -54,13 +55,161 @@ export default function BoardsModal() {
     const boardname = values_array[0];
     // console.log(boardname +"board name")
     // console.log(columnsarray +"column values")
+
     setarray(columnsarray);
-debugger
-    // await createBoardAsync(boardname);
+    debugger
+        await createBoardAsync(boardname);
+    
+        setfirsttime(true);
+    
+
+        // await createBoardAsync(boardname);
 
     // setfirsttime(true);
 
-  };
+    debugger
+    //create columns
+
+    // Add Columns to the new added Board (last one added)
+    
+
+   
+    // if(lastBoard){
+  
+    // if(columnsarray.length>0 && lastBoard){
+  
+    //   debugger
+    
+    //   //call on create column
+    //   columnsarray?.forEach((column_name:string) => (
+       
+    
+        
+    //     createColumn(lastBoard, column_name)
+        
+  
+    //   ))
+  
+    //   // dispatch(BoardEmpty(false))
+    //   dispatch(hide_modal())
+    //   }
+
+    //   else{
+    //     dispatch(hide_modal())
+    //   }
+    // }
+    
+     
+  }
+
+  useEffect(()=>{
+ 
+    const go =()=>{
+  
+      if(first_time){
+      GetBoardsAsync();
+      const lastBoard = Boards[Boards.length-1];
+      // setarr(lastBoard)
+      debugger
+      //here
+      if(array_state.length>0 && lastBoard){
+    
+        debugger
+      
+        //call on create column
+        array_state?.map((column_name:any) => (
+         
+      
+          
+          createColumn(lastBoard, column_name)
+          
+    
+        ))
+    
+        // dispatch(BoardEmpty(false))
+        dispatch(hide_modal())
+        }
+  
+        else{
+          dispatch(hide_modal())
+        }
+      }
+       
+    }
+  
+    go();
+  
+   },[onSubmit])
+      
+  
+  
+// useEffect(()=>{
+
+
+
+
+
+// const lastboard = Boards[Boards.length-1]
+// console.log(lastboard,array_state)
+
+//    if(lastBoard){
+  
+//     if(array_state.length>0 && lastBoard){
+  
+//       debugger
+    
+//       //call on create column
+//       array_state?.forEach((column_name:string) => (
+       
+    
+        
+//         createColumn(lastBoard, column_name)
+        
+  
+//       ))
+  
+//       debugger
+     
+//       dispatch(hide_modal())
+//       }
+
+//     }
+//     else{
+//       debugger
+//       dispatch(hide_modal())
+//     }
+
+
+// },[Boards, array_state])
+  // //this makes sure All boards are added to get last board
+  // useEffect(()=>{
+
+
+    
+
+   
+  //   if(lastBoard){
+  
+  //   if(array_state.length>0 && lastBoard){
+  
+  //     debugger
+    
+  //     //call on create column
+  //     array_state?.map((column_name:any) => (
+       
+    
+        
+  //       createColumn(lastBoard, column_name)
+        
+  
+  //     ))
+  
+  //     // dispatch(BoardEmpty(false))
+  //     dispatch(hide_modal())
+  //     }
+  //   }
+    
+  // },[Boards])
 
   useEffect(()=>{
 
@@ -72,44 +221,45 @@ debugger
   },[initial_values])
 
   
- useEffect(()=>{
+//  useEffect(()=>{
  
-  const go =()=>{
+//   const go =()=>{
 
-    if(first_time){
-    GetBoardsAsync();
-    const lastBoard = Boards[Boards.length-1];
-    // setarr(lastBoard)
-    debugger
-    //here
-    if(array_state.length>0 && lastBoard){
+//     if(first_time){
+//     GetBoardsAsync();
+//     // Add Columns to the new added Board
+//     const lastBoard = Boards[Boards.length-1];
+//     // setarr(lastBoard)
+//     debugger
+//     //here
+//     if(array_state.length>0 && lastBoard){
   
-      debugger
+//       debugger
     
-      //call on create column
-      array_state?.map((column_name:any) => (
+//       //call on create column
+//       array_state?.map((column_name:any) => (
        
     
         
-        createColumn(lastBoard, column_name)
+//         createColumn(lastBoard, column_name)
         
   
-      ))
+//       ))
   
-      // dispatch(BoardEmpty(false))
-      dispatch(hide_modal())
-      }
+//       // dispatch(BoardEmpty(false))
+//       dispatch(hide_modal())
+//       }
 
-      else{
-        dispatch(hide_modal())
-      }
-    }
+//       else{
+//         dispatch(hide_modal())
+//       }
+//     }
      
-  }
+//   }
 
-  go();
+//   go();
 
- },[onSubmit])
+//  },[onSubmit])
     
 
 

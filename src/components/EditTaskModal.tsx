@@ -3,11 +3,13 @@ import type { RootState } from "../store/store";
 import { useSelector, useDispatch } from "react-redux";
 import "./style/modal.css";
 import { useForm } from "react-hook-form";
-import {hide_task_modal } from "../store/boards/BoardSlice";
-import { Create_Task } from "../store/boards/BoardAction";
-export default function TasksModal() {
+import {hide_editTaskmodal, hide_task_modal } from "../store/boards/BoardSlice";
+import { Create_Task, Update_Task } from "../store/boards/BoardAction";
 
 
+export default function EditTaskModal() {
+
+  const SelectedTask = useSelector((state: RootState) => state.Boards.SelectedTask)
   const CurrentColumns = useSelector((state: RootState) => state.Boards.Current_columns)
 
   const dispatch = useDispatch();
@@ -17,18 +19,27 @@ export default function TasksModal() {
     formState: { errors },
   } = useForm();
 
+  const myStateRef = useRef(SelectedTask);
+//   useEffect(()=>{
 
+
+    
+//     myStateRef.current = SelectedTask
+//     debugger
+
+
+//   },[SelectedTask])
   
   const onSubmit = (results:any) => {
     console.log(results.Title , results.Description , results.ListID)
     // console.log(results.Title , results.Description , results.status)
-    Create_Task(results.Title , results.Description , results.ListID)
-    dispatch(hide_task_modal());
+    Update_Task(SelectedTask.id, results.Title , results.Description , results.ListID)
+    dispatch(hide_editTaskmodal());
   };
 
 
   const Task_Modal_view = useSelector(
-    (state: RootState) => state.Boards.show_tasks_modal
+    (state: RootState) => state.Boards.showEditTaskModal
   );
 
   
@@ -36,7 +47,7 @@ export default function TasksModal() {
     console.log(e.target.classList.value)
     if (e.target.classList.value === "modal d-block") {
       
-      dispatch(hide_task_modal());
+      dispatch(hide_editTaskmodal());
     }
       }
 
@@ -59,7 +70,7 @@ export default function TasksModal() {
               <div className="modal-content">
                 <div className="modal-header">
                   <h5 className="modal-title" id="exampleModalLabel">
-                    Add New Task
+                    Edit Task
                   </h5>
                 </div>
                 <div className="modal-body">
@@ -73,6 +84,7 @@ export default function TasksModal() {
                       type="text"
                       id="Title"
                       autoComplete="off"
+                      defaultValue={SelectedTask?.name}
                     /> <br/>
                  {errors.Title && <p>{errors.Title.message  as React.ReactNode}</p>}
 
@@ -85,7 +97,7 @@ export default function TasksModal() {
 
                   <label htmlFor="current_status " className='labels'>Current Status:</label> <br/>
        
-                <select id="Status"  {...register('ListID', { required: 'Status name is required' })}>
+                <select id="Status"  {...register('ListID', { required: 'Group name is required' })}>
                     
                 
 

@@ -203,8 +203,8 @@ export const create_column = async (boardID:any , columnName:any) => {
 
                 try {
                   // Get Boards
-                  const getBoardsUrl = `https://api.trello.com/1/lists/${ListID}/cards?key=3bc3c8703911d1c11ab4e6ea963976b7&token=ATTA8d1cb535c9ef354bb3c7d4cf10b37e9de606909fb9ac55ce026d7c3233c12942C5B95609`;
-                  const ListsResponse = await fetch(getBoardsUrl, {
+                  const gettasksUrl = `https://api.trello.com/1/lists/${ListID}/cards?key=3bc3c8703911d1c11ab4e6ea963976b7&token=ATTA8d1cb535c9ef354bb3c7d4cf10b37e9de606909fb9ac55ce026d7c3233c12942C5B95609`;
+                  const ListsResponse = await fetch(gettasksUrl, {
                     method: 'GET',
                     headers: {
                       'Content-Type': 'application/json'
@@ -222,6 +222,53 @@ export const create_column = async (boardID:any , columnName:any) => {
                   console.error('Failed to get tasks', error);
                 }
               };
+
+
+               //api retrieve selected task to edit
+               export const SelectTask = async (taskID:string) =>{
+
+                try {
+                  // Get Boards
+                  const gettask = `https://api.trello.com/1/cards/${taskID}?key=3bc3c8703911d1c11ab4e6ea963976b7&token=ATTA8d1cb535c9ef354bb3c7d4cf10b37e9de606909fb9ac55ce026d7c3233c12942C5B95609`;
+                  const taskResponse = await fetch(gettask, {
+                    method: 'GET',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                  })
+                  const card = await taskResponse.json();
+                  return card
+                } catch (error) {
+                  console.error('Failed to get card', error);
+                }
+              };
+
+          //api retrieve selected task to edit
+          export const UpdateTask = async (taskID:string,Title:string, Desc:string , ListID:string) =>{
+
+            try {
+              // Get Boards
+              const gettask = `https://api.trello.com/1/cards/${taskID}?key=3bc3c8703911d1c11ab4e6ea963976b7&token=ATTA8d1cb535c9ef354bb3c7d4cf10b37e9de606909fb9ac55ce026d7c3233c12942C5B95609`;
+              const taskResponse = await fetch(gettask, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  name: Title,
+                  desc: Desc,
+                  idList: ListID,
+                  key: '3bc3c8703911d1c11ab4e6ea963976b7',
+                  token: 'ATTA8d1cb535c9ef354bb3c7d4cf10b37e9de606909fb9ac55ce026d7c3233c12942C5B95609'
+                })
+              })
+              const updatedtask = await taskResponse.json();
+              return updatedtask
+            } catch (error) {
+              console.error('Failed to update task', error);
+            }
+          };
+              
 
               
          
