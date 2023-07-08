@@ -9,17 +9,18 @@ import { createBoardAsync } from "../store/boards/BoardAction";
 import { createColumn } from "../store/boards/BoardAction";
 import { GetBoardsAsync } from "../store/boards/BoardAction";
 import { BoardEmpty } from "../store/boards/BoardSlice";
+import { nanoid } from 'nanoid';
 
 interface Item {
   name: string;
 }
 
 export default function BoardsModal() {
-  const [items, setItems] = useState<Item[]>([{ name: 'column' }]);
+  const [items, setItems] = useState<Item[]|any>([{ }]);
 
   const [first_time, setfirsttime] = useState(false)
   const dispatch = useDispatch();
-  const { register, handleSubmit  , reset, formState: { errors }, unregister} = useForm();
+  const { register, handleSubmit  , reset, formState: { errors }, unregister, setValue} = useForm();
 
   const [array_state, setarray] = useState<any>([])
 
@@ -27,14 +28,25 @@ export default function BoardsModal() {
 
   var columnsarray: any[] = [];
 
+  const [initial_values , setinitialvalues] = useState(
+    [
+    {
+    name: 'To Do',
+    },
+
+    {
+    name: 'Doing',
+    }
+])
+
   const onSubmit = async (results:any) => {
 
   const values_array = Object.values(results);
 
     // console.log( values_array + "ok" )
 
-     
-      for(var i = 1 ; i < values_array.length ;i++){
+      //i=2 to skip first the boardname [0] and [1] unique id doesnt have a value.
+      for(var i = 2 ; i < values_array.length ;i++){
 
       columnsarray.push(values_array[i]);
 
@@ -43,12 +55,21 @@ export default function BoardsModal() {
     // console.log(boardname +"board name")
     // console.log(columnsarray +"column values")
     setarray(columnsarray);
+debugger
+    // await createBoardAsync(boardname);
 
-    await createBoardAsync(boardname);
-
-    setfirsttime(true);
+    // setfirsttime(true);
 
   };
+
+  useEffect(()=>{
+
+
+    //console.log(ColumnsofBoard)
+    
+    setItems(initial_values)
+    debugger
+  },[initial_values])
 
   
  useEffect(()=>{
@@ -118,21 +139,19 @@ export default function BoardsModal() {
   
   const addcolumn = () =>{
 
-    const newItem: Item = { name: 'name' };
+    const newItem: Item | any = {  };
     setItems([...items, newItem]);
 
   }
-  const handle_delete = (index:any) =>{
+  const handle_delete = (id:any) =>{
 
 
-    unregister(`column${index}`)
-    
-    setItems((prevItems) => {
-      const updatedItems = [...prevItems];
-      updatedItems.splice(index, 1);
+    setItems((prevItems: any) => {
+      const updatedItems = [...prevItems].filter((item: any) => item.id !== id);
+      unregister(id);
       return updatedItems;
-    });
 
+    });
 
   
   
@@ -171,33 +190,37 @@ export default function BoardsModal() {
                       type="text"
                       id="boardName"
                       autoComplete="off"
+                      placeholder="e.g Web Design"
                     /> <br/>
                  {errors.boardName && <p>{errors.boardName.message  as React.ReactNode}</p>}
 
                     <label htmlFor="columns">Board Columns</label>  <br/>
 
 
-                    {items && items?.map((item,index) => (
+                    {items && items?.map((item:any,index:any) => (
 
 
 
-                        <div className="parent-col d-flex align-items-center" key={index}>
+                      <div className="parent-col d-flex align-items-center" key={index}>
 
-                            <div>
-                            <input key={item.name}
-                            {...register(`column${index}` , {required: 'Column Name is required'})}
-                            type="text"
-                            id="boardName"
-                            autoComplete="off"
-                            onChange={(e) => handleChange(e, index)}
-                            /> <br/>
-                          
-                            {errors.item && <p>{errors.item.message  as React.ReactNode}</p>}
-                            </div>
+                          <div>
+                      
+                          <>
+                          <input
+                          {...register(item.id || (item.id = nanoid()), { required: 'Column Name is required' })}
+                          type="text"
+                          id="boardName"
+                          autoComplete="off"
+                          defaultValue={item.name || ''}
+                          onChange={(e) => handleChange(e, index)}
+                          /> <br/>
+                              
+                          {errors.item && <p>{errors.item.message  as React.ReactNode}</p>}
+                          </>
+                      
+                          </div>
 
-                            <span className="x-icon"  onClick={(e) => handle_delete(index)}>&#x2716;</span>
-
-
+                          <span className="x-icon"  onClick={(e) => handle_delete(item.id)}>&#x2716;</span>
 
 
                         </div>
