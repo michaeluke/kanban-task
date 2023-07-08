@@ -5,7 +5,7 @@ import "./style/modal.css";
 import { Board, hide_editboardmodal} from "../store/boards/BoardSlice";
 import { useForm } from "react-hook-form";
 import {addBoard} from "../store/boards/BoardSlice"
-import { createBoardAsync } from "../store/boards/BoardAction";
+import { DeleteColumn, createBoardAsync } from "../store/boards/BoardAction";
 import { createColumn } from "../store/boards/BoardAction";
 import { GetBoardsAsync } from "../store/boards/BoardAction";
 import { BoardEmpty } from "../store/boards/BoardSlice";
@@ -39,8 +39,8 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
   var columnsarray: any[] = [];
 
 ;
-  const [items, setItems] = useState<Item[]|object[]|any>([{ }]);
-
+//   const [items, setItems] = useState<Item[]|object[]|any>([{ }]);
+   const [items, setItems] = useState<Item[]|any>([{ }]);
   const { register, handleSubmit  , reset, formState: { errors }, unregister , setValue} = useForm();
   
   //re-render whenver a new board is selected
@@ -48,6 +48,7 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
 
 
     console.log(ColumnsofBoard)
+
     
     setItems(ColumnsofBoard)
     debugger
@@ -92,62 +93,104 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
     console.log(columnsarray +"column values")
     setarray(columnsarray);
 
+    
     if(SelectedBoard){
-        const BoardId = SelectedBoard.id
-        debugger
-        UpdateBoardName(SelectedBoard.id , boardname);
+
+        //if boardname doesnt match edit board name
+        if(SelectedBoard.name != boardname){
+            const BoardId = SelectedBoard.id
+            debugger
+            UpdateBoardName(SelectedBoard.id , boardname);
+        }
+     
+
+    
+        if(ColumnsofBoard != columnsarray){
+
+            var longer_array = []
+            debugger
+            //for every column in columnsarray but not in columnsofBoard ==> Add column 
+            //foe every column in ColumnsofBoard but not in columns array ==> Delete column
+
+            if(ColumnsofBoard.length > columnsarray.length){
+
+                longer_array = ColumnsofBoard
+
+            }
+            else{
+                longer_array = columnsarray
+            }
+
+            for( var i =0 ;i<longer_array.length; i++){
+
+
+                console.log(columnsarray[i])
+                console.log(ColumnsofBoard[i])
+                debugger
+                //if both arrays have element values..
+            if(columnsarray[i] && ColumnsofBoard[i]){
+
+                //if values are equal ==> do nothing
+                if (columnsarray[i] === ColumnsofBoard[i].name) {
+
+                 //do nothing
+                }
+                //if they don't match create new column with new value and delete old column
+                else{
+                    createColumn(SelectedBoard, columnsarray[i])
+                    DeleteColumn(SelectedBoard, ColumnsofBoard[i].id) 
+                }
+
+            }
+
+            //if number of new columns > old column ==> create new column
+            if(columnsarray[i] && !ColumnsofBoard[i]){
+
+                    createColumn(SelectedBoard, columnsarray[i])
+    
+            }
+
+              //if number of new columns < old columns ==> delete old column
+              if(ColumnsofBoard[i] && !columnsarray[i]){
+                DeleteColumn(SelectedBoard, ColumnsofBoard[i].id) 
+        }
 
     }
-    
+            // columnsarray.forEach((column_name_user, index) => {
+            //     const prevColumn = ColumnsofBoard[index];
+            
+            //     //prevvolumn_name exists
+            //     if(prevColumn){
+            //     // Check if the element in new_columns matches its corresponding element in prev_columns
+            //     if (column_name_user === prevColumn.name) {
+            //       // do nothing
+            //       debugger
+            //       return null
+            //     }
+            //     else{
+            //         //if old column exists but doesn't match ==> create new column with new name and delete old one.
+            //         createColumn(SelectedBoard, column_name_user)
+            //         DeleteColumn(SelectedBoard, prevColumn.id)
+            //     }
+            //     }
 
-    
 
 
 
-    // setfirsttime(true);
+            //     else{
+            //         //if no column exists in this index in old columns ==> create new column
+            //          createColumn(SelectedBoard, column_name_user)
+            //     }
+              
+            //         })
+                }
 
-  };
-
-  
-//  useEffect(()=>{
- 
-//   const go =()=>{
-
-//     if(first_time){
- 
-    
-//     // setarr(lastBoard)
-//     debugger
-//     //here
-//     if(array_state.length>0 && SelectedBoard){
-  
-//       debugger
-    
-//       //call on create column
-//       array_state?.map((column_name:any) => (
-       
-    
-        
-//         createColumn(SelectedBoard, column_name)
-        
-  
-//       ))
-  
-//       // dispatch(BoardEmpty(false))
-//       dispatch(hide_editboardmodal());
-//       }
-
-//       else{
-//         dispatch(hide_editboardmodal());
-//       }
-//     }
      
-//   }
 
-//   go();
-
-//  },[onSubmit])
+        dispatch(hide_editboardmodal())
+    }
     
+  };
 
 
 
@@ -164,7 +207,25 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
 
   const handleChange = (e:any,index:any) =>{
 
-    items[index].name = (e.target.value);
+    // items[index].name = e.target.value
+
+    // debugger
+    // console.log(items[index].name)
+    // console.log(e.target.value)
+    // debugger
+
+    // const copyArray = [...items]; // Create a copy of the array
+    // debugger
+    // // Modify the name property of the copied object at the given index
+    // copyArray[index].name = e.target.value;
+
+    // var newarray : any = [];
+    // newarray={...items[index], name: e.target.value}
+  
+    const newarray = [...items]; // Create a copy of the items array
+    newarray[index] = { ...newarray[index], name: e.target.value }; 
+    console.log(newarray)
+    setItems(newarray); // Update the state with the modified array
 
   }
 

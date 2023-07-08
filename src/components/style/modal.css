@@ -19,4 +19,8 @@
 .modal-overlay .modal .parent-col .x-icon {
   cursor: pointer;
   padding-left: 20px;
+}
+
+button {
+  cursor: pointer;
 }/*# sourceMappingURL=modal.css.map */

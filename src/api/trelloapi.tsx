@@ -104,7 +104,33 @@ export const create_column = async (boardID:any , columnName:any) => {
 
 
 
+    //api to soft delete a list 
 
+          export const Delete_Column = async (ListID:string)=>{
+
+
+            try {
+              // Get Boards
+              const BoardUrl = `https://api.trello.com/1/lists/${ListID}?key=3bc3c8703911d1c11ab4e6ea963976b7&token=ATTA8d1cb535c9ef354bb3c7d4cf10b37e9de606909fb9ac55ce026d7c3233c12942C5B95609`;
+              const boardResponse = await fetch(BoardUrl, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  closed: true,
+                })
+
+              });
+             
+            } catch (error) {
+              console.error('Failed to update boards name.', error);
+            }
+
+          
+
+
+          }
 
     //api delete selected board
           export const Delete_Boards = async (boardID:string) => {

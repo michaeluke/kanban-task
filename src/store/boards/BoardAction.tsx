@@ -12,7 +12,7 @@ import { Get_Tasks } from "../../api/trelloapi";
 import { triggertaskaddedevent } from "./BoardSlice";
 import { create_column } from "../../api/trelloapi";
 import { Update_BoardName } from "../../api/trelloapi";
-
+import { Delete_Column } from "../../api/trelloapi";
 //Creating a board
 export const createBoardAsync = async (boardName: any) => {
     
@@ -83,7 +83,7 @@ export const View_Current_Board = (board:Board|null) => {
 
  
 
- //Uodate Board's Name
+ //Update Board's Name
 export const UpdateBoardName = (BoardId:string, NewName:any) => {
 
 
@@ -114,6 +114,20 @@ export const UpdateBoardName = (BoardId:string, NewName:any) => {
   
 
  
+ }
+
+ export const DeleteColumn = (currentboard:any,ListID:any) =>{
+
+
+ // console.log(board.id)
+ Delete_Column(ListID)
+ .then(() => {
+   store.dispatch(SetCurrentBoard(currentboard))
+  })
+  .catch((error) => {
+   console.error('Failed to delete column', error);
+ });
+  
  }
 
  //delete selected board
@@ -148,26 +162,37 @@ export const Delete_Board = (board:Board|null) => {
  }
 
  //Create Column
- export const createColumn = async (last_board:any ,column: string) => {
+ export const createColumn = async (selected_board:any ,column: string) => {
     
 
 
-  console.log(last_board.name)
+  // console.log(last_board.name)
 
 
-   await create_column(last_board.id,column)
-   .then((column_added) => {
+   await create_column(selected_board.id,column)
+  .then(() => {
    
      // store.dispatch(addBoard(newBoard));
-     console.log(column_added);
+  GetColumnsofBoard(selected_board.id)
+  .then((columns) => {
+    console.log("inside column");
+    console.log(columns)
+    store.dispatch(SetCurrentColumn(columns))
+    debugger
 
 
    })
    .catch((error) => {
-     console.error('Failed to create board:', error);
+     console.error('Failed to get columns', error);
    });
 
-};
+  }) 
+  .catch((error) => {
+    console.error('Failed to create column', error);
+  });
+
+}
+
 
 
  
