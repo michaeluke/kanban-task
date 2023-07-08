@@ -10,7 +10,7 @@ import type { RootState } from '../store/store'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import { Delete_Board } from '../store/boards/BoardAction';
-import { show_editboardmodal, show_task_modal } from '../store/boards/BoardSlice';
+import { show_deletemodal, show_editboardmodal, show_task_modal } from '../store/boards/BoardSlice';
 import { Get_Current_Board } from '../store/boards/BoardAction';
 
 const Header = (props: { open: boolean }) => {
@@ -36,8 +36,11 @@ const Header = (props: { open: boolean }) => {
 
   const handleDelete = () =>{
 
-    Delete_Board(Current_Board)
+
+    // Delete_Board(Current_Board)
     // dispatch(Setboardselected(false))
+
+    dispatch(show_deletemodal())
     handleMenuClose()
   }
 

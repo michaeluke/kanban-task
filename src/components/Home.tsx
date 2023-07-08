@@ -9,6 +9,7 @@ import TasksModal from './Modal_Tasks'
 import NoBoards from './NoBoards'
 import EditBoard from './EditBoardModal'
 import EditTaskModal from './EditTaskModal'
+import DeleteBoard from './DeleteModal'
 
  const Home = (): JSX.Element => {
 
@@ -27,7 +28,7 @@ import EditTaskModal from './EditTaskModal'
 
     const edittaskmodal = useSelector((state: RootState) => state.Boards.showEditTaskModal)
    
-   
+    const DeleteModal = useSelector((state: RootState) => state.Boards.show_deletemodal)
 
     return(
 
@@ -42,7 +43,7 @@ import EditTaskModal from './EditTaskModal'
          
         {Modal_Tasks ? <TasksModal/> : null}
         {edittaskmodal ? <EditTaskModal/> : null}
-        
+        {DeleteModal ? <DeleteBoard/> : null}
         </Sidebar>
         
         </>
