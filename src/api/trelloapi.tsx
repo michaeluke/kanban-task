@@ -76,6 +76,19 @@ export const create_column = async (boardID:any , columnName:any) => {
             }
           };
       
+    //api for updating a board
+          export const Update_Board = async (boardID:string) =>{
+
+
+
+
+
+            
+          }
+
+
+
+
 
     //api delete selected board
           export const Delete_Boards = async (boardID:string) => {

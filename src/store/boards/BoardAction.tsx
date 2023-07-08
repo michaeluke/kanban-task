@@ -1,6 +1,6 @@
 import {createBoard} from "../../api/trelloapi";
 import { Get_Boards } from "../../api/trelloapi";
-import { Board, SetTasks, SettColumnfirsttime, addBoard } from "./BoardSlice";
+import { Board, BoardsCount, SetTasks, SettColumnfirsttime, addBoard } from "./BoardSlice";
 import { store } from '../store';
 import { GetBoards } from "./BoardSlice";
 import { SetCurrentBoard } from "./BoardSlice";
@@ -29,27 +29,6 @@ export const createBoardAsync = async (boardName: any) => {
 
 };
 
-export const createColumn = async (last_board:any ,column: string) => {
-    
-
-
-   console.log(last_board.name)
-
- 
-    await create_column(last_board.id,column)
-    .then((column_added) => {
-    
-      // store.dispatch(addBoard(newBoard));
-      console.log(column_added);
-
-
-    })
-    .catch((error) => {
-      console.error('Failed to create board:', error);
-    });
-
-};
-
 
 //get all boards
 export const GetBoardsAsync = async() => {
@@ -61,7 +40,7 @@ export const GetBoardsAsync = async() => {
       console.log(Boards)
      
       store.dispatch(GetBoards(Boards));
-
+      store.dispatch(BoardsCount(Boards.length));
     })
     .catch((error) => {
       console.error('Failed to get boards:', error);
@@ -116,6 +95,7 @@ export const Delete_Board = (board:Board|null) => {
       console.log("inside");
       console.log(Boards)
       store.dispatch(GetBoards(Boards));
+      store.dispatch(BoardsCount(Boards.length));
 
     })
     .catch((error) => {
@@ -132,6 +112,29 @@ export const Delete_Board = (board:Board|null) => {
 
  
  }
+
+ //Create Column
+ export const createColumn = async (last_board:any ,column: string) => {
+    
+
+
+  console.log(last_board.name)
+
+
+   await create_column(last_board.id,column)
+   .then((column_added) => {
+   
+     // store.dispatch(addBoard(newBoard));
+     console.log(column_added);
+
+
+   })
+   .catch((error) => {
+     console.error('Failed to create board:', error);
+   });
+
+};
+
 
  
  //creating a task in a list

@@ -7,7 +7,7 @@ import createBoard from '../../api/trelloapi'
 export interface BoardState {
   boards_counter: number,
   boards_array: string[] ,
-  columns: string[],
+
   tasks: object[],
   show_boards_modal: boolean,
   Current_board:  Board |null ;
@@ -22,6 +22,7 @@ export interface BoardState {
 
   anyBoardSelected : boolean
   BoardEmpty : boolean
+  showeditboardmodal :boolean
 }
 
 export interface Board {
@@ -51,7 +52,7 @@ export interface Task {
 const initialState: BoardState = {
     boards_counter: 0,
     boards_array: [],
-    columns: [],
+   
     tasks: [],
     show_boards_modal: false,
     Current_board : null,
@@ -63,6 +64,8 @@ const initialState: BoardState = {
     anyBoardSelected: false,
     first_columns :[],
     BoardEmpty : false,
+
+    showeditboardmodal : false,
 }
 
 export const BoardSlice = createSlice({
@@ -83,6 +86,13 @@ export const BoardSlice = createSlice({
       },
     hide_task_modal: (state) => {
         state.show_tasks_modal = false;
+      },
+
+    show_editboardmodal: (state) => {
+        state.showeditboardmodal = true;
+      },
+    hide_editboardmodal: (state) => {
+        state.showeditboardmodal = false;
       },
 
     addBoard: (state, action) => {
@@ -163,6 +173,11 @@ export const BoardSlice = createSlice({
     
       },
 
+    BoardsCount: (state, action)=>{
+
+      state.boards_counter = action.payload
+    }
+
    
   },
 })
@@ -170,6 +185,6 @@ export const BoardSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { show_modal, hide_modal , show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , Setboardselected , SettColumnfirsttime , BoardEmpty} = BoardSlice.actions
+export const { show_modal, hide_modal , show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , Setboardselected , SettColumnfirsttime , BoardEmpty , BoardsCount , show_editboardmodal, hide_editboardmodal} = BoardSlice.actions
 
 export default BoardSlice.reducer

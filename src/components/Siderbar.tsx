@@ -33,7 +33,7 @@ import BoardsList from './Boards_list';
 const drawerWidth = 240;
 const appbarheight = 74;
 
-// const remaining_height = (100% - ({appbarheight}+ 'px')) ;
+
 
 const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
   open?: boolean;
@@ -93,7 +93,7 @@ export default function PersistentDrawerLeft({children} : PersistentDrawerLeftPr
 
  
 
-
+  const BoardsCount =  useSelector((state: RootState) => state.Boards.boards_counter)
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -175,7 +175,7 @@ export default function PersistentDrawerLeft({children} : PersistentDrawerLeftPr
         <Divider />
         <Box sx={{textAlign:'center', marginTop:'20px'}}>
   
-        All Boards
+        All Boards ({BoardsCount})
     
 
         </Box>
