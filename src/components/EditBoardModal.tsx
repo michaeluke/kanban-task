@@ -156,33 +156,7 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
         }
 
     }
-            // columnsarray.forEach((column_name_user, index) => {
-            //     const prevColumn = ColumnsofBoard[index];
-            
-            //     //prevvolumn_name exists
-            //     if(prevColumn){
-            //     // Check if the element in new_columns matches its corresponding element in prev_columns
-            //     if (column_name_user === prevColumn.name) {
-            //       // do nothing
-            //       debugger
-            //       return null
-            //     }
-            //     else{
-            //         //if old column exists but doesn't match ==> create new column with new name and delete old one.
-            //         createColumn(SelectedBoard, column_name_user)
-            //         DeleteColumn(SelectedBoard, prevColumn.id)
-            //     }
-            //     }
-
-
-
-
-            //     else{
-            //         //if no column exists in this index in old columns ==> create new column
-            //          createColumn(SelectedBoard, column_name_user)
-            //     }
-              
-            //         })
+         
                 }
 
      
@@ -207,20 +181,7 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
 
   const handleChange = (e:any,index:any) =>{
 
-    // items[index].name = e.target.value
-
-    // debugger
-    // console.log(items[index].name)
-    // console.log(e.target.value)
-    // debugger
-
-    // const copyArray = [...items]; // Create a copy of the array
-    // debugger
-    // // Modify the name property of the copied object at the given index
-    // copyArray[index].name = e.target.value;
-
-    // var newarray : any = [];
-    // newarray={...items[index], name: e.target.value}
+   
   
     const newarray = [...items]; // Create a copy of the items array
     newarray[index] = { ...newarray[index], name: e.target.value }; 

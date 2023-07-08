@@ -143,6 +143,19 @@ export const Delete_Board = (board:Board|null) => {
       console.log("inside");
       console.log(Boards)
       store.dispatch(GetBoards(Boards));
+
+      if(Boards.length != 0){
+        store.dispatch(SetCurrentBoard(Boards[0]))
+        GetColumnsofBoard(Boards[0].id)
+        .then((columns) => {
+          console.log("inside column");
+          console.log(columns)
+          store.dispatch(SetCurrentColumn(columns))
+        })
+        .catch((error) => {
+          console.error('Failed to get columns', error);
+        });
+      }
       store.dispatch(BoardsCount(Boards.length));
 
     })
