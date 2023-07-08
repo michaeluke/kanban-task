@@ -21,6 +21,7 @@ export default function BoardsList(){
 
   const Boards = useSelector((state: RootState) => state.Boards.boards_array)
   const Tasks = useSelector((state: RootState) => state.Boards.tasks)
+  
   useEffect(()=>{
 
     GetBoardsAsync();

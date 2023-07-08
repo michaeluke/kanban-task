@@ -77,13 +77,29 @@ export const create_column = async (boardID:any , columnName:any) => {
           };
       
     //api for updating a board
-          export const Update_Board = async (boardID:string) =>{
+          export const Update_BoardName = async (boardID:string , NewName:any) =>{
 
 
+            try {
+              // Get Boards
+              const BoardUrl = `https://api.trello.com/1/boards/${boardID}?key=3bc3c8703911d1c11ab4e6ea963976b7&token=ATTA8d1cb535c9ef354bb3c7d4cf10b37e9de606909fb9ac55ce026d7c3233c12942C5B95609`;
+              const boardResponse = await fetch(BoardUrl, {
+                method: 'PUT',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                  name: NewName,
+                })
 
+              });
+              const board = await boardResponse.json();
+              return board
+             
+            } catch (error) {
+              console.error('Failed to update boards name.', error);
+            }
 
-
-            
           }
 
 
@@ -104,8 +120,6 @@ export const create_column = async (boardID:any , columnName:any) => {
                       },
                     });
                     
-                    
-
                     return null
                  
                   } catch (error) {

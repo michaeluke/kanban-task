@@ -10,7 +10,7 @@ export interface BoardState {
 
   tasks: object[],
   show_boards_modal: boolean,
-  Current_board:  Board |null ;
+  Current_board:  Board | null  ;
   Current_columns : object[],
   show_tasks_modal: boolean,
   Combinedarray : object[],

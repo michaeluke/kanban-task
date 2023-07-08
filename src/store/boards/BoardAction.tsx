@@ -11,7 +11,7 @@ import { Add_Task } from "../../api/trelloapi";
 import { Get_Tasks } from "../../api/trelloapi";
 import { triggertaskaddedevent } from "./BoardSlice";
 import { create_column } from "../../api/trelloapi";
-
+import { Update_BoardName } from "../../api/trelloapi";
 
 //Creating a board
 export const createBoardAsync = async (boardName: any) => {
@@ -48,7 +48,7 @@ export const GetBoardsAsync = async() => {
 
 };
 
-//get selected board
+//set selected board
 export const Get_Current_Board = (board:Board|null) => {
 
  console.log(board)
@@ -81,6 +81,40 @@ export const View_Current_Board = (board:Board|null) => {
  }
 
 
+ 
+
+ //Uodate Board's Name
+export const UpdateBoardName = (BoardId:string, NewName:any) => {
+
+
+
+  debugger
+    // console.log(board.id)
+    Update_BoardName(BoardId , NewName)
+    .then((board) => {
+      store.dispatch(SetCurrentBoard(board))
+      Get_Boards()
+    .then((Boards) => {
+      console.log("inside");
+      console.log(Boards)
+      store.dispatch(GetBoards(Boards));
+      store.dispatch(BoardsCount(Boards.length));
+
+    })
+    .catch((error) => {
+      console.error('Failed update all boards:', error);
+    });
+    })
+    .catch((error) => {
+      console.error('Failed to update board:', error);
+    });
+
+
+  
+  
+
+ 
+ }
 
  //delete selected board
 export const Delete_Board = (board:Board|null) => {

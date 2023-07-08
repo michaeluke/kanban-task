@@ -10,6 +10,7 @@ import { createColumn } from "../store/boards/BoardAction";
 import { GetBoardsAsync } from "../store/boards/BoardAction";
 import { BoardEmpty } from "../store/boards/BoardSlice";
 import { nanoid } from 'nanoid';
+import { UpdateBoardName } from "../store/boards/BoardAction";
 interface Item {
   id: string
   name: string;
@@ -70,6 +71,9 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
 
   }, []);
 
+
+
+
   const onSubmit = async (results:any) => {
 
   const values_array = Object.values(results);
@@ -77,7 +81,7 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
     // console.log( values_array + "ok" )
 
      
-    //2 to skip first the boardname [0] and [1] unique id doesnt have a value.
+    //i = 2 to skip first the boardname [0] and [1] unique id doesnt have a value.
       for(var i = 2 ; i < values_array.length ;i++){
 
       columnsarray.push(values_array[i]);
@@ -88,7 +92,16 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
     console.log(columnsarray +"column values")
     setarray(columnsarray);
 
-    debugger
+    if(SelectedBoard){
+        const BoardId = SelectedBoard.id
+        debugger
+        UpdateBoardName(SelectedBoard.id , boardname);
+
+    }
+    
+
+    
+
 
 
     // setfirsttime(true);
