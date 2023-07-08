@@ -51,6 +51,8 @@ import EmptyBoard from './EmptyBoard'
      
     
     },[curr_board])
+
+
   
 
     //getting tasks in each column in the Board.
@@ -70,6 +72,13 @@ import EmptyBoard from './EmptyBoard'
 
    
 
+    useEffect(()=>{
+
+    
+      Get_Current_Board(CurrentBoard)
+      
+      View_Current_Board(CurrentBoard)
+    },[CurrentBoard])
 
 
       //create a combined array to connect between the columns and the cards.
@@ -142,7 +151,7 @@ import EmptyBoard from './EmptyBoard'
           </div>
  
 
- {CombinedArray.length ==0  &&
+ {CombinedArray.length == 0  &&
 
 
       <EmptyBoard/>

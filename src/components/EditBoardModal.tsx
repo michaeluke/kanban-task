@@ -97,11 +97,11 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
     if(SelectedBoard){
 
         //if boardname doesnt match edit board name
-        if(SelectedBoard.name != boardname){
-            const BoardId = SelectedBoard.id
+        // if(SelectedBoard.name != boardname){
+        //     const BoardId = SelectedBoard.id
             debugger
             UpdateBoardName(SelectedBoard.id , boardname);
-        }
+        // }
      
 
     
