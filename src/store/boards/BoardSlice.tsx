@@ -31,6 +31,11 @@ export interface BoardState {
 
   show_deletemodal : boolean,
   firstBoard :  Board | null  ;
+
+
+
+  EmptyBoard : Board | null  ;
+  
 }
 
 export interface Board {
@@ -78,7 +83,12 @@ const initialState: BoardState = {
 
     show_deletemodal : false,
 
-    firstBoard : null
+    firstBoard : null,
+
+    EmptyBoard : {
+      id: '1',
+      name : 'No Boards Available',
+    }
 }
 
 export const BoardSlice = createSlice({

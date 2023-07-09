@@ -23,6 +23,7 @@ export const createBoardAsync = async (boardName: any) => {
       .then((newBoard) => {
         debugger
         store.dispatch(addBoard(newBoard));
+        GetBoardsAsync();
       })
       .catch((error) => {
         console.error('Failed to create board:', error);
@@ -42,6 +43,9 @@ export const GetBoardsAsync = async() => {
      
       store.dispatch(GetBoards(Boards));
       store.dispatch(BoardsCount(Boards.length));
+      if(Boards.length==0){
+        store.dispatch(SetCurrentBoard(null))
+      }
     })
     .catch((error) => {
       console.error('Failed to get boards:', error);
@@ -158,14 +162,11 @@ export const Delete_Board = (board:Board|null) => {
       if(Boards.length != 0){
         store.dispatch(SetCurrentBoard(Boards[0]))
         GetColumnsofBoard(Boards[0].id)
-        // .then((columns) => {
-        //   console.log("inside column");
-        //   console.log(columns)
-        //   store.dispatch(SetCurrentColumn(columns))
-        // })
-        // .catch((error) => {
-        //   console.error('Failed to get columns', error);
-        // });
+      
+      }
+      if(Boards.length == 0){
+        store.dispatch(SetCurrentBoard(null))
+      
       }
       store.dispatch(BoardsCount(Boards.length));
 

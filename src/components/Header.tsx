@@ -9,10 +9,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../store/store'
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import { Delete_Board } from '../store/boards/BoardAction';
-import { show_deletemodal, show_editboardmodal, show_task_modal } from '../store/boards/BoardSlice';
+import { Delete_Board, SetFirstBoard } from '../store/boards/BoardAction';
+import { SetCurrentBoard, Set_FirstBoard, show_deletemodal, show_editboardmodal, show_task_modal } from '../store/boards/BoardSlice';
 import { Get_Current_Board } from '../store/boards/BoardAction';
-
+import { Board } from '../store/boards/BoardSlice';
 const Header = (props: { open: boolean }) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -20,10 +20,19 @@ const Header = (props: { open: boolean }) => {
   const dispatch = useDispatch();
   const Current_Theme = useSelector((state: RootState) => state.Theme.Theme_mode)
 
-  const Current_Board = useSelector((state: RootState) => state.Boards.Current_board)
+  var Current_Board = useSelector((state: RootState) => state.Boards.Current_board)
 
-  const firstBoard = useSelector((state: RootState) => state.Boards.firstBoard)
+  var firstBoard = useSelector((state: RootState) => state.Boards.firstBoard)
   const Boards = useSelector((state: RootState) => state.Boards.boards_array)
+
+
+  const boardcounter = useSelector((state: RootState) => state.Boards.boards_counter)
+
+  // var emptyboard = useSelector((state: RootState) => state.Boards.EmptyBoard)
+  // interface Board {
+  //   id: string
+  //   name: string;
+  // }
 
 
   const handleMenuOpen = (event:any) => {
@@ -101,9 +110,12 @@ const Header = (props: { open: boolean }) => {
 
       
         <h1 className={!open ? 'platform font-weight-bold' : 'platform-closed font-weight-bold'}>
-       {Current_Board ?  `${Current_Board.name}` : `${firstBoard?.name}`
+        {Boards.length>0? Current_Board ?  `${Current_Board.name}` : `${firstBoard?.name}`  : 'No Boards Available'
 
-       }
+        }
+        {/* {Boards.length==0 && 'No Boards Available'
+
+        } */}
         </h1>
      
        

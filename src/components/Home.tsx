@@ -10,6 +10,7 @@ import NoBoards from './NoBoards'
 import EditBoard from './EditBoardModal'
 import EditTaskModal from './EditTaskModal'
 import DeleteBoard from './DeleteModal'
+import { Get_Current_Board } from '../store/boards/BoardAction'
 
  const Home = (): JSX.Element => {
 
@@ -30,6 +31,7 @@ import DeleteBoard from './DeleteModal'
    
     const DeleteModal = useSelector((state: RootState) => state.Boards.show_deletemodal)
 
+ 
     return(
 
         <>

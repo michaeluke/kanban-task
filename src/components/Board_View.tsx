@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../store/store'
 import './style/Board.css'
 import { Get_Tasks_In_A_List, Select_Task, SetFirstBoard, View_Current_Board } from '../store/boards/BoardAction'
-import { set_combinedarray, show_deletemodal, show_editTaskmodal, show_editboardmodal, show_task_modal } from '../store/boards/BoardSlice'
+import { hide_deletemodal, hide_editTaskmodal, set_combinedarray, show_deletemodal, show_editTaskmodal, show_editboardmodal, show_task_modal } from '../store/boards/BoardSlice'
 import { ClearTasks } from '../store/boards/BoardSlice'
 import { Board } from '../store/boards/BoardSlice'
 import { Get_Current_Board } from '../store/boards/BoardAction'
@@ -31,6 +31,11 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
    
 
     const firstboard = useSelector((state: RootState) => state.Boards.firstBoard)
+    const boardcounter = useSelector((state: RootState) => state.Boards.boards_counter)
+
+    const emptyboard = useSelector((state: RootState) => state.Boards.EmptyBoard)
+   
+
     useEffect(() => {
 
 
@@ -47,10 +52,11 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
    
   }, [curr_board]);
 
+
   //empty nice
      useEffect(() => {
     
-
+   
       if(CurrentBoard){
 
     
@@ -58,6 +64,7 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
         Get_Current_Board(CurrentBoard);
       
       }
+     
       else{
         
         //set currentboard to first board
@@ -67,7 +74,7 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
       
       
       
-    }, [firstboard,show_editboardmodal,show_editTaskmodal,show_deletemodal,show_task_modal]);
+    }, [firstboard,show_task_modal,show_editboardmodal,show_task_modal,show_editTaskmodal,show_deletemodal,hide_deletemodal,hide_editTaskmodal]);
  
     useEffect(() => {
     

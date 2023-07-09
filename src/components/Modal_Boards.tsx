@@ -57,48 +57,16 @@ export default function BoardsModal() {
     // console.log(columnsarray +"column values")
 
     setarray(columnsarray);
-    debugger
+    // debugger
         await createBoardAsync(boardname);
     
         setfirsttime(true);
     
 
-        // await createBoardAsync(boardname);
-
-    // setfirsttime(true);
-
-    debugger
-    //create columns
-
-    // Add Columns to the new added Board (last one added)
-    
-
    
-    // if(lastBoard){
-  
-    // if(columnsarray.length>0 && lastBoard){
-  
-    //   debugger
-    
-    //   //call on create column
-    //   columnsarray?.forEach((column_name:string) => (
-       
-    
-        
-    //     createColumn(lastBoard, column_name)
-        
-  
-    //   ))
-  
-    //   // dispatch(BoardEmpty(false))
-    //   dispatch(hide_modal())
-    //   }
 
-    //   else{
-    //     dispatch(hide_modal())
-    //   }
-    // }
-    
+    // debugger
+   
      
   }
 
@@ -143,73 +111,8 @@ export default function BoardsModal() {
       
   
   
-// useEffect(()=>{
-
-
-
-
-
-// const lastboard = Boards[Boards.length-1]
-// console.log(lastboard,array_state)
-
-//    if(lastBoard){
-  
-//     if(array_state.length>0 && lastBoard){
-  
-//       debugger
-    
-//       //call on create column
-//       array_state?.forEach((column_name:string) => (
-       
-    
-        
-//         createColumn(lastBoard, column_name)
-        
-  
-//       ))
-  
-//       debugger
-     
-//       dispatch(hide_modal())
-//       }
-
-//     }
-//     else{
-//       debugger
-//       dispatch(hide_modal())
-//     }
-
-
-// },[Boards, array_state])
-  // //this makes sure All boards are added to get last board
-  // useEffect(()=>{
-
-
-    
 
    
-  //   if(lastBoard){
-  
-  //   if(array_state.length>0 && lastBoard){
-  
-  //     debugger
-    
-  //     //call on create column
-  //     array_state?.map((column_name:any) => (
-       
-    
-        
-  //       createColumn(lastBoard, column_name)
-        
-  
-  //     ))
-  
-  //     // dispatch(BoardEmpty(false))
-  //     dispatch(hide_modal())
-  //     }
-  //   }
-    
-  // },[Boards])
 
   useEffect(()=>{
 
@@ -221,45 +124,7 @@ export default function BoardsModal() {
   },[initial_values])
 
   
-//  useEffect(()=>{
- 
-//   const go =()=>{
 
-//     if(first_time){
-//     GetBoardsAsync();
-//     // Add Columns to the new added Board
-//     const lastBoard = Boards[Boards.length-1];
-//     // setarr(lastBoard)
-//     debugger
-//     //here
-//     if(array_state.length>0 && lastBoard){
-  
-//       debugger
-    
-//       //call on create column
-//       array_state?.map((column_name:any) => (
-       
-    
-        
-//         createColumn(lastBoard, column_name)
-        
-  
-//       ))
-  
-//       // dispatch(BoardEmpty(false))
-//       dispatch(hide_modal())
-//       }
-
-//       else{
-//         dispatch(hide_modal())
-//       }
-//     }
-     
-//   }
-
-//   go();
-
-//  },[onSubmit])
     
 
 
