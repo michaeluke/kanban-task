@@ -22,9 +22,9 @@ const Header = (props: { open: boolean }) => {
 
   const Current_Board = useSelector((state: RootState) => state.Boards.Current_board)
 
+  const firstBoard = useSelector((state: RootState) => state.Boards.firstBoard)
   const Boards = useSelector((state: RootState) => state.Boards.boards_array)
 
-  
 
   const handleMenuOpen = (event:any) => {
     setAnchorEl(event.currentTarget);
@@ -101,7 +101,7 @@ const Header = (props: { open: boolean }) => {
 
       
         <h1 className={!open ? 'platform font-weight-bold' : 'platform-closed font-weight-bold'}>
-       {Current_Board ?  `${Current_Board.name}` : ''
+       {Current_Board ?  `${Current_Board.name}` : `${firstBoard?.name}`
 
        }
         </h1>

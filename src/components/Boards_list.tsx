@@ -21,7 +21,7 @@ export default function BoardsList(){
 
   const Boards = useSelector((state: RootState) => state.Boards.boards_array)
   const Tasks = useSelector((state: RootState) => state.Boards.tasks)
-  
+
   useEffect(()=>{
 
     GetBoardsAsync();
@@ -42,11 +42,11 @@ export default function BoardsList(){
   
 
       Get_Current_Board(board)
-      View_Current_Board(board);
+      // View_Current_Board(board);
   
       // dispatch(Setboardselected(true))
       //in order not to duplicate tasks.
-      dispatch(ClearTasks())
+      // dispatch(ClearTasks())
 
   }
   

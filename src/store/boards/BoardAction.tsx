@@ -13,7 +13,7 @@ import { triggertaskaddedevent } from "./BoardSlice";
 import { create_column } from "../../api/trelloapi";
 import { Update_BoardName } from "../../api/trelloapi";
 import { Delete_Column } from "../../api/trelloapi";
-
+import { Set_FirstBoard } from "./BoardSlice";
 //Creating a board
 export const createBoardAsync = async (boardName: any) => {
     
@@ -50,15 +50,25 @@ export const GetBoardsAsync = async() => {
 };
 
 //set selected board
-export const Get_Current_Board = (board:Board|null) => {
+export const SetFirstBoard = (board:Board|null) => {
 
  console.log(board)
 
 
-  store.dispatch(SetCurrentBoard(board))
+  store.dispatch(Set_FirstBoard(board))
 
 
 }
+export const Get_Current_Board = (board:Board|null) => {
+
+  console.log(board)
+ 
+ debugger
+   store.dispatch(SetCurrentBoard(board))
+ 
+ 
+ }
+ 
 
 
 //view selected board by retrieving it's column
@@ -148,14 +158,14 @@ export const Delete_Board = (board:Board|null) => {
       if(Boards.length != 0){
         store.dispatch(SetCurrentBoard(Boards[0]))
         GetColumnsofBoard(Boards[0].id)
-        .then((columns) => {
-          console.log("inside column");
-          console.log(columns)
-          store.dispatch(SetCurrentColumn(columns))
-        })
-        .catch((error) => {
-          console.error('Failed to get columns', error);
-        });
+        // .then((columns) => {
+        //   console.log("inside column");
+        //   console.log(columns)
+        //   store.dispatch(SetCurrentColumn(columns))
+        // })
+        // .catch((error) => {
+        //   console.error('Failed to get columns', error);
+        // });
       }
       store.dispatch(BoardsCount(Boards.length));
 

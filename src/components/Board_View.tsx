@@ -1,19 +1,18 @@
-import React ,{useEffect, useState} from 'react' 
+import React ,{useEffect, useState , useRef} from 'react' 
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../store/store'
 import './style/Board.css'
-import { Get_Tasks_In_A_List, Select_Task, View_Current_Board } from '../store/boards/BoardAction'
-import { set_combinedarray, show_editTaskmodal } from '../store/boards/BoardSlice'
+import { Get_Tasks_In_A_List, Select_Task, SetFirstBoard, View_Current_Board } from '../store/boards/BoardAction'
+import { set_combinedarray, show_deletemodal, show_editTaskmodal, show_editboardmodal, show_task_modal } from '../store/boards/BoardSlice'
 import { ClearTasks } from '../store/boards/BoardSlice'
 import { Board } from '../store/boards/BoardSlice'
 import { Get_Current_Board } from '../store/boards/BoardAction'
+import { SetCurrentBoard } from '../store/boards/BoardSlice'
 import EmptyBoard from './EmptyBoard'
-
+import { UpdateBoardName } from '../store/boards/BoardAction'
  const BoardView = () => {
 
   const [curr_board, setCurrBoard] = useState<Board | any>(null);
-
-  const [isFirstRender, setIsFirstRender] = useState(true);
 
     const dispatch = useDispatch();
 
@@ -29,32 +28,87 @@ import EmptyBoard from './EmptyBoard'
 
     const Boards =   useSelector((state: RootState) => state.Boards.boards_array)
 
-
-    const BoardEmpty = useSelector((state: RootState) => state.Boards.BoardEmpty)
-
-    // //viewfirst board 
-    useEffect(()=>{
-
    
-      if(Boards.length>0 && isFirstRender){
-    
-        setCurrBoard(Boards[0])
-    
-        Get_Current_Board(curr_board)
-      
-        View_Current_Board(curr_board)
-        // dispatch(ClearTasks())
-    
-       
-       }
 
-     
+    const firstboard = useSelector((state: RootState) => state.Boards.firstBoard)
+    useEffect(() => {
+
+
+      
+      if (Boards.length > 0) {
+
+  
+        setCurrBoard(Boards[0]);
+        SetFirstBoard(curr_board)
+        // View_Current_Board(curr_board);
     
-    },[curr_board])
+      
+      }
+   
+  }, [curr_board]);
+
+  //empty nice
+     useEffect(() => {
+    
+
+      if(CurrentBoard){
+
+    
+        
+        Get_Current_Board(CurrentBoard);
+      
+      }
+      else{
+        
+        //set currentboard to first board
+        Get_Current_Board(firstboard);
+        // View_Current_Board(firstboard);
+      }
+      
+      
+      
+    }, [firstboard,show_editboardmodal,show_editTaskmodal,show_deletemodal,show_task_modal]);
+ 
+    useEffect(() => {
+    
+
+      if(CurrentBoard){
+
+        Get_Current_Board(CurrentBoard);
+        View_Current_Board(CurrentBoard);
+        dispatch(ClearTasks())
+      }
+      else{
+        
+        Get_Current_Board(firstboard);
+        View_Current_Board(firstboard);
+      }
+   
+      
+      
+      
+    }, [CurrentBoard]);
 
 
   
+    useEffect(()=>{
 
+        if(CurrentBoard){
+
+    
+        Get_Current_Board(CurrentBoard);
+        View_Current_Board(CurrentBoard);
+      }
+      else{
+        
+        Get_Current_Board(firstboard);
+        View_Current_Board(firstboard);
+      }
+      
+      dispatch(ClearTasks())
+     
+    },[taskadded])
+   
     //getting tasks in each column in the Board.
     useEffect(() => {
 
@@ -71,20 +125,9 @@ import EmptyBoard from './EmptyBoard'
       }, [CurrentColumns]);
 
    
-
-    useEffect(()=>{
-
-    
-      Get_Current_Board(CurrentBoard)
-      
-      View_Current_Board(CurrentBoard)
-    },[CurrentBoard])
-
-
       //create a combined array to connect between the columns and the cards.
       useEffect(()=>{
        
-        
         if(Array.isArray(CurrentColumns) && Array.isArray(Tasks) ){
 
         const columns_tasks = CurrentColumns.map((column: any) => ({
@@ -93,21 +136,13 @@ import EmptyBoard from './EmptyBoard'
         }));
 
           dispatch(set_combinedarray(columns_tasks))
+      
       }
 
-      
+    
     },[CurrentColumns , Tasks ])
 
 
-
-    //taskadded is just a boolean in the state that is triggered each time the user submits a new task in order to re-render this component.
-    useEffect(()=>{
-     
-    View_Current_Board(CurrentBoard)
-     
-    dispatch(ClearTasks())
-    
-    },[taskadded])
 
 
     const handletaskedit = (task:any)=>{

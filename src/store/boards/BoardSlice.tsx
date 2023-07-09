@@ -30,6 +30,7 @@ export interface BoardState {
   lastboard:  Board | null  ;
 
   show_deletemodal : boolean,
+  firstBoard :  Board | null  ;
 }
 
 export interface Board {
@@ -76,6 +77,8 @@ const initialState: BoardState = {
     lastboard : null,
 
     show_deletemodal : false,
+
+    firstBoard : null
 }
 
 export const BoardSlice = createSlice({
@@ -101,7 +104,7 @@ export const BoardSlice = createSlice({
     show_editboardmodal: (state) => {
         state.showeditboardmodal = true;
       },
-      
+
     hide_editboardmodal: (state) => {
         state.showeditboardmodal = false;
       },
@@ -143,6 +146,12 @@ export const BoardSlice = createSlice({
     SetCurrentBoard: (state,action) => {
 
       state.Current_board = action.payload;
+
+    },
+
+    Set_FirstBoard: (state,action) => {
+
+      state.firstBoard = action.payload;
 
     },
 
@@ -219,6 +228,6 @@ export const BoardSlice = createSlice({
 
 
 // Action creators are generated for each case reducer function
-export const { show_modal, hide_modal ,show_deletemodal, hide_deletemodal ,show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , Setboardselected , SettColumnfirsttime , BoardEmpty , BoardsCount , show_editboardmodal, hide_editboardmodal , show_editTaskmodal, hide_editTaskmodal,SetSelectedTask , SetLastBoard} = BoardSlice.actions
+export const { show_modal, hide_modal ,show_deletemodal, hide_deletemodal ,show_task_modal, hide_task_modal ,addBoard , GetBoards , SetCurrentBoard , SetCurrentColumn , SetTasks , ClearTasks , set_combinedarray ,triggertaskaddedevent , Setboardselected , SettColumnfirsttime , BoardEmpty , BoardsCount , show_editboardmodal, hide_editboardmodal , show_editTaskmodal, hide_editTaskmodal,SetSelectedTask , SetLastBoard, Set_FirstBoard} = BoardSlice.actions
 
 export default BoardSlice.reducer

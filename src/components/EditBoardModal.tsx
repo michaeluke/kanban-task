@@ -5,7 +5,7 @@ import "./style/modal.css";
 import { Board, hide_editboardmodal} from "../store/boards/BoardSlice";
 import { useForm } from "react-hook-form";
 import {addBoard} from "../store/boards/BoardSlice"
-import { DeleteColumn, createBoardAsync } from "../store/boards/BoardAction";
+import { DeleteColumn, Get_Current_Board, createBoardAsync } from "../store/boards/BoardAction";
 import { createColumn } from "../store/boards/BoardAction";
 import { GetBoardsAsync } from "../store/boards/BoardAction";
 import { BoardEmpty } from "../store/boards/BoardSlice";
@@ -25,9 +25,9 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
   const [first, setfirst] = useState(true)
   const dispatch = useDispatch();
   
-  const SelectedBoard = useSelector((state: RootState) => state.Boards.Current_board)
+  var SelectedBoard = useSelector((state: RootState) => state.Boards.Current_board)
 
-
+  const firstBoard = useSelector((state: RootState) => state.Boards.firstBoard)
 
   const [array_state, setarray] = useState<any>([])
 
@@ -40,10 +40,13 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
 
 ;
 //   const [items, setItems] = useState<Item[]|object[]|any>([{ }]);
-   const [items, setItems] = useState<Item[]|any>([{ }]);
+ const [items, setItems] = useState<Item[]|any>([{ }]);
   const { register, handleSubmit  , reset, formState: { errors }, unregister , setValue} = useForm();
   
   //re-render whenver a new board is selected
+
+
+  
   useEffect(()=>{
 
 
@@ -163,6 +166,7 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
 
         dispatch(hide_editboardmodal())
     }
+  
     
   };
 

@@ -1,10 +1,10 @@
 
-import React from "react";
+import React , {useEffect}from "react";
 import type { RootState } from "../store/store";
 import { useSelector, useDispatch } from "react-redux";
 import { hide_deletemodal } from "../store/boards/BoardSlice";
 import { Delete_Board } from "../store/boards/BoardAction";
-
+import { Get_Current_Board } from "../store/boards/BoardAction";
 export default function DeleteBoard(){
 
     const dispatch = useDispatch()
@@ -12,9 +12,7 @@ export default function DeleteBoard(){
 
     const view =  useSelector((state: RootState) => state.Boards.show_deletemodal)
 
-
-
-    
+  
       
       const handle_Click = (e:any) =>{
         console.log(e.target.classList.value)
