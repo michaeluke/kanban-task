@@ -188,7 +188,7 @@ export default function PersistentDrawerLeft({children} : PersistentDrawerLeftPr
 
         <BoardsList />
         <Add_board/>
-        <Divider />
+       
         
         <Toggler/>
       
@@ -197,7 +197,7 @@ export default function PersistentDrawerLeft({children} : PersistentDrawerLeftPr
         
         <div className='sidebar-btn-parent'>
                   
-        <button  onClick={handleDrawerClose} className='sidebar-btn' style={{ backgroundColor: `${color}` , color:'#828FA3' }}> 
+        <button  onClick={handleDrawerClose} className='sidebar-btn' style={{ backgroundColor: `${color}` , color:'#828FA3' , marginBottom:"20px" }}> 
           
           Hide Sidebar
         </button>

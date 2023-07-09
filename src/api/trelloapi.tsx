@@ -177,7 +177,7 @@ export const create_column = async (boardID:any , columnName:any) => {
 
 
           //create task in a certain column
-          export const Add_Task = async (Task_Name:string, Desc:string, Listid:string) => {
+          export const Add_Task = async (Task_Name:string, Listid:string) => {
              // Create cards
                 const createTasksUrl = 'https://api.trello.com/1/cards';
                 const TaskName = Task_Name;
@@ -244,7 +244,7 @@ export const create_column = async (boardID:any , columnName:any) => {
               };
 
           //api retrieve selected task to edit
-          export const UpdateTask = async (taskID:string,Title:string, Desc:string , ListID:string) =>{
+          export const UpdateTask = async (taskID:string,Title:string, ListID:string) =>{
 
             try {
               // Get Boards
@@ -256,7 +256,6 @@ export const create_column = async (boardID:any , columnName:any) => {
                 },
                 body: JSON.stringify({
                   name: Title,
-                  desc: Desc,
                   idList: ListID,
                   key: '3bc3c8703911d1c11ab4e6ea963976b7',
                   token: 'ATTA8d1cb535c9ef354bb3c7d4cf10b37e9de606909fb9ac55ce026d7c3233c12942C5B95609'

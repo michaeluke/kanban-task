@@ -32,7 +32,7 @@ return(
   <div className="parent_switch d-flex">
 
     <LightModeIcon sx={{ 
-  fontSize:'20px' ,color:'#828FA3',marginRight:'20px', marginTop:"4px"}}/>
+  fontSize:'20px' ,color:'#828FA3',marginRight:'20px'}}/>
 
       <label className="switch">
   
@@ -40,11 +40,10 @@ return(
         <span className="slider"></span>
       </label>
    
-      <div className="moon" style={{marginLeft:'20px', marginTop:'4px'}}>
+      <div className="moon" style={{marginLeft:'20px'}}>
       <BsFillMoonStarsFill   color="#828FA3"  fontSize={'15px'}    />
       </div>
-      {/* <DarkModeIcon sx={{ 
-     fontSize:'28px' ,color:'#828FA3',marginLeft:'20px', marginTop:"4px"}} /> */}
+      
    
 
 </div>

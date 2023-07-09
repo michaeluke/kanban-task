@@ -246,12 +246,12 @@ export const Delete_Board = (board:Board|null) => {
 
  
  //creating a task in a list
-export const Create_Task = (Title:string, Desc: string , Listid:string) => {
+export const Create_Task = (Title:string , Listid:string) => {
 
   
 
   
-     Add_Task(Title , Desc , Listid)
+     Add_Task(Title , Listid)
     .then(() => {
     
       store.dispatch(triggertaskaddedevent())
@@ -328,10 +328,10 @@ export const Create_Task = (Title:string, Desc: string , Listid:string) => {
 
 
   //creating a task in a list
-export const Update_Task = (taskid:string ,Title:string, Desc: string , Listid:string) => {
+export const Update_Task = (taskid:string ,Title:string, Listid:string) => {
 
   
-  UpdateTask(taskid,Title , Desc , Listid)
+  UpdateTask(taskid,Title, Listid)
  .then(() => {
  
   //

@@ -10,6 +10,7 @@ import { createColumn } from "../store/boards/BoardAction";
 import { GetBoardsAsync } from "../store/boards/BoardAction";
 import { BoardEmpty } from "../store/boards/BoardSlice";
 import { nanoid } from 'nanoid';
+import { color } from "@mui/system";
 
 interface Item {
   name: string;
@@ -199,62 +200,76 @@ export default function BoardsModal() {
                   <form onSubmit={handleSubmit(onSubmit)}>
 
 
-                    <label htmlFor="boardName">Board Name:</label>  <br/>
+                    <div className="topsec">
+                    <label htmlFor="boardName">Name</label>  <br/>
                     <input
-                      {...register("boardName", {required: 'Board Name is required'})}
+                      {...register("boardName", {required:  `Can't be empty`})}
                       type="text"
                       id="boardName"
                       autoComplete="off"
                       placeholder="e.g Web Design"
-                    /> <br/>
-                 {errors.boardName && <p>{errors.boardName.message  as React.ReactNode}</p>}
+                   
+                      style={{ borderColor: errors.boardName ? 'red' : '' }}
+                    /> 
+                
+                    {errors.boardName && <p>{errors.boardName.message  as React.ReactNode}</p>}
+                 
+              
 
-                    <label htmlFor="columns">Board Columns</label>  <br/>
+                 </div>
+                    <label htmlFor="columns">Columns</label>  <br/>
 
 
                     {items && items?.map((item:any,index:any) => (
 
+                    <>
 
+                      <div className="parent-col d-flex align-items-center" key={item.id || (item.id = nanoid())}>
 
-                      <div className="parent-col d-flex align-items-center" key={index}>
-
-                          <div>
+                    
                       
-                          <>
+                         
                           <input
-                          {...register(item.id || (item.id = nanoid()), { required: 'Column Name is required' })}
+                          {...register(item.id || (item.id = nanoid()), { required: `Can't be empty` })}
                           type="text"
                           id="boardName"
                           autoComplete="off"
                           defaultValue={item.name || ''}
                           onChange={(e) => handleChange(e, index)}
-                          /> <br/>
+                          style={{ borderColor: errors[item.id] ? 'red' : '' }}
+                          /> 
                               
-                          {errors.item && <p>{errors.item.message  as React.ReactNode}</p>}
-                          </>
+                              
+                          
+                     
                       
-                          </div>
-
                           <span className="x-icon"  onClick={(e) => handle_delete(item.id)}>&#x2716;</span>
 
 
+                      
                         </div>
+                          <>
+                          {errors[item.id] && <p id="error">{errors[item.id]?.message as React.ReactNode}</p>}
+                          </>
+                          </>
                     ))}
                     <br/>
 
-                <button type="button" onClick={addcolumn}>+ Add New Column</button>
+
+                  <div className="parent-footer d-flex flex-column">
+
+                  <button className="addcolumn" type="button" onClick={addcolumn}>+ Add New Column</button>
 
 
                   
 
-                    {/* <input {...register("column", {required: 'Column Name is required'})}
-                     type="text" id="columns"   autoComplete="off" /> <br/>
-                  {errors.column && <p>{errors.column.message  as React.ReactNode}</p>} */}
-
 
       
 
-                    <button type="submit">Submit</button>
+                <button className="boardsubmit" type="submit">Create New Board</button>
+                  </div>
+
+              
 
                   </form>
                 </div>

@@ -246,58 +246,70 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
                 <div className="modal-body">
 
                   <form onSubmit={handleSubmit(onSubmit)}>
+                  <div className="topsec">
 
-
-                    <label htmlFor="boardName">Board Name:</label>  <br/>
+                    <label htmlFor="boardName">Board Name</label>  <br/>
                    
                     <input
-                      {...register("boardName", {required: 'Board Name is required'})}
+                      {...register("boardName", {required: `Can't be empty`})}
                       type="text"
                       id="boardName"
                       autoComplete="off"
                       defaultValue={SelectedBoard?.name}
+                      style={{ borderColor: errors.boardName ? 'red' : '' }}
                       onInput={(event: React.ChangeEvent<HTMLInputElement>)=> editboardname(event.target.value) }
                     /> <br/>
                  {errors.boardName && <p>{errors.boardName.message  as React.ReactNode}</p>}
 
+                 </div>
                     <label htmlFor="columns">Board Columns</label>  <br/>
 
 
                     {items&& items?.map((item:any,index:any) => (
 
 
-
+                            <>
                         <div className="parent-col d-flex align-items-center" key={index}>
 
-                            <div>
+                           
                          
-                            <>
+                        
                             <input
-                            {...register(item.id || (item.id = nanoid()), { required: 'Column Name is required' })}
+                            {...register(item.id || (item.id = nanoid()), { required: `Can't be empty` })}
                             type="text"
                             id="boardName"
                             autoComplete="off"
                             defaultValue={item.name}
                             onChange={(e) => handleChange(e, index)}
                             /> <br/>
-                                
-                            {errors.item && <p>{errors.item.message  as React.ReactNode}</p>}
-                            </>
-                         
-                            </div>
+                          
+                        
 
                             <span className="x-icon"  onClick={(e) => handle_delete(item.id)}>&#x2716;</span>
 
 
                         </div>
+                         <>
+                         {errors[item.id] && <p id="error">{errors[item.id]?.message as React.ReactNode}</p>}
+                         </>
+                         </>
                     ))}
                     <br/>
 
-                <button type="button" onClick={addcolumn}>+ Add New Column</button>
+                
       
 
-                    <button type="submit">Submit</button>
+                    <div className="parent-footer d-flex flex-column">
 
+                    <button  className="addcolumn" type="button" onClick={addcolumn}>+ Add New Column</button>
+
+
+
+
+
+
+                    <button className="boardsubmit" type="submit">Save Changes</button>
+                    </div>
                   </form>
                 </div>
                 <div className="modal-footer"></div>

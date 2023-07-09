@@ -31,9 +31,9 @@ export default function EditTaskModal() {
 //   },[SelectedTask])
   
   const onSubmit = (results:any) => {
-    console.log(results.Title , results.Description , results.ListID)
+    console.log(results.Title , results.ListID)
     // console.log(results.Title , results.Description , results.status)
-    Update_Task(SelectedTask.id, results.Title , results.Description , results.ListID)
+    Update_Task(SelectedTask.id, results.Title , results.ListID)
     dispatch(hide_editTaskmodal());
   };
 
@@ -88,11 +88,11 @@ export default function EditTaskModal() {
                     /> <br/>
                  {errors.Title && <p>{errors.Title.message  as React.ReactNode}</p>}
 
-
+{/* 
                     <label htmlFor="Desc">Description</label>  <br/>
                     <input {...register("Description", {required: 'Description is required'})}
                      type="text" id="Desc"   autoComplete="off" /> <br/>
-                  {errors.Description && <p>{errors.Description.message  as React.ReactNode}</p>}
+                  {errors.Description && <p>{errors.Description.message  as React.ReactNode}</p>} */}
 
 
                   <label htmlFor="current_status " className='labels'>Current Status:</label> <br/>
@@ -117,7 +117,7 @@ export default function EditTaskModal() {
                 )}
 
 
-                    <button type="submit">Submit</button>
+                <button className="boardsubmit" type="submit">Save Changes</button>
 
                   </form>
                 </div>
