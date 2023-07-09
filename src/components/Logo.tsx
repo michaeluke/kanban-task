@@ -12,7 +12,7 @@ const Logo = () => {
         <>
         <div className='header-container'>
         
-        <div className='header-content d-flex align-items-center justify-content-between'>
+        <div className='header-content d-flex '>
 
         <div className='logo d-flex align-items-center'>
       
@@ -23,13 +23,13 @@ const Logo = () => {
         <stop offset={1} stopColor="#A8A4FF" />
       </linearGradient>
     </svg>
-    <ViewWeekIcon sx={{ fill: "url(#linearColors)" , fontSize:'44px' , paddingLeft:'10px' }} />
+    <ViewWeekIcon sx={{ fill: "url(#linearColors)" , fontSize:'44px' , paddingLeft:'10px' , marginRight:'10px'}} />
     
   
 
    
 
-        <div className='kanban font-weight-bold'>
+        <div className='kanban'>
         kanban
         </div>
 

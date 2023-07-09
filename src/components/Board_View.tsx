@@ -69,7 +69,8 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
         
         //set currentboard to first board
         Get_Current_Board(firstboard);
-        // View_Current_Board(firstboard);
+        //dispatch(SetCurrentBoard(Boards[0]))
+        View_Current_Board(firstboard);
       }
       
       

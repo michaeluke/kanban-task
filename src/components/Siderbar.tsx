@@ -25,7 +25,8 @@ import Toggler from './Toggler';
 import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../store/store'
 import { useEffect } from 'react';
-import './style/Toggler.css'
+// import './style/Toggler.css'
+import './style/Mui.css'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Add_board from './add_board';
 import BoardsList from './Boards_list';
@@ -106,19 +107,21 @@ export default function PersistentDrawerLeft({children} : PersistentDrawerLeftPr
   }
   else{
     color = 'white';
+   
   }
 
+  //true means darkmode
   useEffect(() => {
   
     const htmlElement = document.documentElement;
-    htmlElement.style.setProperty("--color", Current_Theme === true ? "#121721" : "#F4F6F8");
-    // console.log(htmlElement.style);
+    htmlElement.style.setProperty("--bg-color", Current_Theme === true ? "#20212C" : "#E4EBFA");
+    console.log(htmlElement.style);
   }, [Current_Theme]);
 
   useEffect(() => {
   
     const htmlElement = document.documentElement;
-    htmlElement.style.setProperty("--text-color", Current_Theme === false ? "black" : "white");
+    htmlElement.style.setProperty("--text-color", Current_Theme === true ? "white" : "black");
     // console.log(htmlElement.style);
   }, [Current_Theme]);
 
@@ -173,41 +176,20 @@ export default function PersistentDrawerLeft({children} : PersistentDrawerLeftPr
             <Logo/>
         </DrawerHeader>
         <Divider />
-        <Box sx={{textAlign:'center', marginTop:'20px'}}>
+        <Box sx={{textAlign:'start', marginTop:'20px',paddingLeft:'36px',fontWeight:'700'}}>
   
-        All Boards ({BoardsCount})
+        <div className='allboards'> All Boards ({BoardsCount})</div>
+       
     
 
         </Box>
 
         <Box sx={{display:'flex', flexDirection:'column' , justifyContent:'space-between', height: '100%'}}>
 
-        {/* <List sx={{paddingLeft:'18px'}}>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  
-                 <TbLayoutBoardSplit />
-
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-
-        </List> */}
-
         <BoardsList />
-        
+        <Add_board/>
         <Divider />
-
-        <Box>
-
-          <Add_board/>
-
-        </Box>
-
+        
         <Toggler/>
       
   

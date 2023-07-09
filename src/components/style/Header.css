@@ -8,13 +8,10 @@
 .header-container .header-content {
   padding: 16px;
 }
-.header-container .header-content .logo {
-  -moz-column-gap: 15px;
-       column-gap: 15px;
-}
 .header-container .header-content .logo .kanban {
   margin-bottom: 0px;
   font-size: 26px;
+  font-weight: 700;
 }
 .header-container .header-content .logo .platform {
   margin-left: 50px;
@@ -37,6 +34,9 @@
   justify-content: center;
   margin-right: 16px;
   padding: 10px 18px;
+}
+.header-container .header-content .right-section .add-task-btn:hover {
+  background: #A8A4FF;
 }
 
 button {

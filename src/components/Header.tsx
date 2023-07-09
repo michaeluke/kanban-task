@@ -28,11 +28,7 @@ const Header = (props: { open: boolean }) => {
 
   const boardcounter = useSelector((state: RootState) => state.Boards.boards_counter)
 
-  // var emptyboard = useSelector((state: RootState) => state.Boards.EmptyBoard)
-  // interface Board {
-  //   id: string
-  //   name: string;
-  // }
+
 
 
   const handleMenuOpen = (event:any) => {
@@ -46,8 +42,6 @@ const Header = (props: { open: boolean }) => {
   const handleDelete = () =>{
 
 
-    // Delete_Board(Current_Board)
-    // dispatch(Setboardselected(false))
 
     dispatch(show_deletemodal())
     handleMenuClose()
@@ -96,7 +90,7 @@ const Header = (props: { open: boolean }) => {
         <stop offset={1} stopColor="#A8A4FF" />
       </linearGradient>
     </svg>
-    <ViewWeekIcon sx={{ fill: "url(#linearColors)" , fontSize:'44px' , paddingLeft:'10px' }} />
+    <ViewWeekIcon sx={{ fill: "url(#linearColors)" , fontSize:'44px' , paddingLeft:'10px' , marginRight:'10px' }} />
     
   
 

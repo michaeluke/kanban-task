@@ -22,6 +22,7 @@ export default function Toggler(){
     const htmlElement = document.documentElement;
     htmlElement.style.setProperty("--side_colors", Current_Theme === true ? "#000112" : "#E4EBFA");
   
+
   }, [Current_Theme]);
 
 

@@ -14,7 +14,7 @@ export default function Add_board(){
   
     return(
         
-        <div onClick={()=>  dispatch(show_modal())} className='add_board d-flex align-items-center justify-content-center'> 
+        <div onClick={()=>  dispatch(show_modal())} className='add_board d-flex align-items-center justify-content-start' style={{paddingLeft:'34px'}}> 
           
         <TbLayoutBoardSplit color='#5964E0' className='dash-icon'/>
 

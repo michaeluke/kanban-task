@@ -26,9 +26,6 @@ export const ThemeSlice = createSlice({
     // },
 
 
-    // switch_theme: (state, action: PayloadAction<boolean>) => {
-    //   state.Theme_mode = action.payload
-    // },
 
     switch_theme: (state) => {
         state.Theme_mode = !state.Theme_mode;

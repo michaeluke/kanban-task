@@ -16,7 +16,6 @@
         .logo{
             
 
-            column-gap: 15px;
 
            
 
@@ -24,6 +23,7 @@
                
                 margin-bottom: 0px;
                 font-size: 26px;
+                font-weight: 700;
               
                 
             }
@@ -58,6 +58,11 @@
                 margin-right: 16px;
                 padding: 10px 18px;
             }
+            .add-task-btn:hover{
+    
+                background: #A8A4FF;
+               
+            }
         }
       
     }
@@ -90,3 +95,4 @@ button{
     color:#828FA3;
     font-weight: 800;
 }
+

@@ -14,6 +14,8 @@ import { create_column } from "../../api/trelloapi";
 import { Update_BoardName } from "../../api/trelloapi";
 import { Delete_Column } from "../../api/trelloapi";
 import { Set_FirstBoard } from "./BoardSlice";
+import type { RootState } from "../store";
+import { useSelector, useDispatch } from "react-redux";
 //Creating a board
 export const createBoardAsync = async (boardName: any) => {
     
@@ -206,8 +208,26 @@ export const Delete_Board = (board:Board|null) => {
     console.log("inside column");
     console.log(columns)
     //here fix
-    store.dispatch(SetCurrentColumn(columns))
-    debugger
+    //if this is the first column ==> show columns else don't view them
+ 
+    // store.dispatch(SetCurrentColumn(columns))
+  
+    // if(Boards.length <= 1){
+    //   store.dispatch(SetCurrentBoard(Boards[0]))
+    
+    // }
+    // if(Boardcount ==1){
+    //   console.log(Boardcount)
+    //   debugger
+    //   store.dispatch(SetCurrentColumn(columns))
+    // }
+    // else{
+
+    //   console.log(Boardcount)
+    //   debugger
+    //   store.dispatch(SetCurrentColumn(columns))
+    // }
+
 
 
    })
