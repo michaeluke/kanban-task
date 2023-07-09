@@ -13,7 +13,22 @@ export default function DeleteBoard(){
     const view =  useSelector((state: RootState) => state.Boards.show_deletemodal)
 
   
-      
+    const Current_Theme = useSelector((state: RootState) => state.Theme.Theme_mode)
+    //true means darkmode
+  useEffect(() => {
+  
+  const htmlElement = document.documentElement;
+  htmlElement.style.setProperty("--bg-color", Current_Theme === true ? "#20212C" : "white");
+  console.log(htmlElement.style);
+  }, [Current_Theme]);
+  useEffect(() => {
+  
+  const htmlElement = document.documentElement;
+  htmlElement.style.setProperty("--text-color", Current_Theme === true ? "white" : "black");
+  // console.log(htmlElement.style);
+  }, [Current_Theme]);
+  
+  
       const handle_Click = (e:any) =>{
         console.log(e.target.classList.value)
         if (e.target.classList.value === "modal d-block") {
