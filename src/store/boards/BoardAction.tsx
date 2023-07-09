@@ -43,9 +43,10 @@ export const GetBoardsAsync = async() => {
      
       store.dispatch(GetBoards(Boards));
       store.dispatch(BoardsCount(Boards.length));
-      if(Boards.length==0){
-        store.dispatch(SetCurrentBoard(null))
-      }
+      // if(Boards.length==0){
+      //   store.dispatch(SetCurrentBoard(null))
+      //   store.dispatch(Set_FirstBoard(null))
+      // }
     })
     .catch((error) => {
       console.error('Failed to get boards:', error);
@@ -153,21 +154,23 @@ export const Delete_Board = (board:Board|null) => {
     console.log(board.id)
     Delete_Boards(board.id)
     .then(() => {
-      Get_Boards()
+    Get_Boards()
     .then((Boards) => {
       console.log("inside");
       console.log(Boards)
       store.dispatch(GetBoards(Boards));
 
+      if(Boards.length == 0){
+       
+        store.dispatch(Set_FirstBoard(null))
+        store.dispatch(SetCurrentBoard(null))
+      }
       if(Boards.length != 0){
         store.dispatch(SetCurrentBoard(Boards[0]))
         GetColumnsofBoard(Boards[0].id)
       
       }
-      if(Boards.length == 0){
-        store.dispatch(SetCurrentBoard(null))
-      
-      }
+     
       store.dispatch(BoardsCount(Boards.length));
 
     })
@@ -203,7 +206,7 @@ export const Delete_Board = (board:Board|null) => {
     console.log("inside column");
     console.log(columns)
     //here fix
-    // store.dispatch(SetCurrentColumn(columns))
+    store.dispatch(SetCurrentColumn(columns))
     debugger
 
 

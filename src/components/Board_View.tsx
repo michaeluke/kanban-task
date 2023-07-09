@@ -74,7 +74,7 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
       
       
       
-    }, [firstboard,show_task_modal,show_editboardmodal,show_task_modal,show_editTaskmodal,show_deletemodal,hide_deletemodal,hide_editTaskmodal]);
+    }, [firstboard,show_task_modal,show_editboardmodal,show_deletemodal]);
  
     useEffect(() => {
     
