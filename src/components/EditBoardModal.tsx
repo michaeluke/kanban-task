@@ -45,7 +45,20 @@ const Modal_view = useSelector( (state: RootState) => state.Boards.showeditboard
   
   //re-render whenver a new board is selected
 
+  const Current_Theme = useSelector((state: RootState) => state.Theme.Theme_mode)
+  //true means darkmode
+useEffect(() => {
 
+const htmlElement = document.documentElement;
+htmlElement.style.setProperty("--bg-color", Current_Theme === true ? "#20212C" : "#E4EBFA");
+console.log(htmlElement.style);
+}, [Current_Theme]);
+useEffect(() => {
+
+const htmlElement = document.documentElement;
+htmlElement.style.setProperty("--text-color", Current_Theme === true ? "white" : "black");
+// console.log(htmlElement.style);
+}, [Current_Theme]);
   
   useEffect(()=>{
 

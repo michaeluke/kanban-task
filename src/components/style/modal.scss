@@ -1,3 +1,8 @@
+:root {
+    --bg-color: #E4EBFA;
+  }
+
+
 .modal-overlay {
     background-color: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -68,6 +73,8 @@ button{
 
 .modal-content{
     padding: 32px;
+
+    background-color: var(--bg-color);
 }
 
 .topsec{

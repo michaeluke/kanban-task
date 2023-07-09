@@ -18,7 +18,21 @@ export default function TasksModal() {
   } = useForm();
 
 
-  
+  const Current_Theme = useSelector((state: RootState) => state.Theme.Theme_mode)
+  //true means darkmode
+useEffect(() => {
+
+const htmlElement = document.documentElement;
+htmlElement.style.setProperty("--bg-color", Current_Theme === true ? "#20212C" : "#E4EBFA");
+console.log(htmlElement.style);
+}, [Current_Theme]);
+useEffect(() => {
+
+const htmlElement = document.documentElement;
+htmlElement.style.setProperty("--text-color", Current_Theme === true ? "white" : "black");
+// console.log(htmlElement.style);
+}, [Current_Theme]);
+
   const onSubmit = (results:any) => {
     console.log(results.Title ,results.ListID)
     // console.log(results.Title , results.Description , results.status)
