@@ -118,8 +118,15 @@ const Header = (props: { open: boolean }) => {
         </div>
 
         <div className='right-section d-flex align-items-center'>
+        <div className="d-sm-none">
+        <button onClick={handle_task_modal} className="circle-button">+</button>
+         </div>
 
+      <div className="d-none d-sm-block">
+      
         <button onClick={handle_task_modal} className="add-task-btn">+ Add New Task</button>
+      </div>
+      
         <MoreVertIcon sx={{color:'#828FA3' , cursor:'pointer'}}   onClick={handleMenuOpen}/>
         </div>
         <Menu

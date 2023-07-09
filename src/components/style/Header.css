@@ -65,4 +65,15 @@ button {
 .empty {
   color: #828FA3;
   font-weight: 800;
+}
+
+.circle-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #635fc7;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
 }/*# sourceMappingURL=Header.css.map */
