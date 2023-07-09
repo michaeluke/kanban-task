@@ -56,7 +56,7 @@ export default function DeleteBoard(){
                 <div className="modal-dialog" role="document">
                   <div className="modal-content">
                     <div className="modal-header">
-                      <h5 className="modal-title" id="exampleModalLabel">
+                      <h5 className="modal-title" id="exampleModalLabel" style={{color:'#EA5555'}}>
                         Delete this board?
                       </h5>
                     </div>
@@ -65,11 +65,11 @@ export default function DeleteBoard(){
                       <div>Are you sure you want to delete the ‘{Current_Board?.name}’ board? This action will remove all columns and tasks and cannot be reversed.
                       </div>
 
-                      <div className="parent buttons d-flex flex-column">
+                      <div className="parent buttons d-flex justify-content-evenly">
                         
-                        <button onClick={handleDelete}>Yes</button>
+                        <button className="deletecolumn" onClick={handleDelete}>Delete</button>
                         
-                        <button onClick={handleClose}>No</button>
+                        <button className="cancelcolumn" onClick={handleClose}>Cancel</button>
                       </div>
                     
     

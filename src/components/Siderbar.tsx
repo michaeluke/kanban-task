@@ -30,7 +30,7 @@ import './style/Mui.css'
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Add_board from './add_board';
 import BoardsList from './Boards_list';
-
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 const drawerWidth = 240;
 const appbarheight = 74;
 
@@ -195,8 +195,9 @@ export default function PersistentDrawerLeft({children} : PersistentDrawerLeftPr
   
         </Box>
         
-        <div className='sidebar-btn-parent'>
+        <div className='sidebar-btn-parent d-flex'>
                   
+        <VisibilityOffIcon  sx={{color:'#828FA3', marginLeft:"5px"}}/>
         <button  onClick={handleDrawerClose} className='sidebar-btn' style={{ backgroundColor: `${color}` , color:'#828FA3' , marginBottom:"20px" }}> 
           
           Hide Sidebar

@@ -73,6 +73,7 @@ export default function TasksModal() {
                       type="text"
                       id="Title"
                       autoComplete="off"
+                      placeholder="e.g. Take coffee break"
                     /> <br/>
                  {errors.Title && <p>{errors.Title.message  as React.ReactNode}</p>}
 
@@ -83,7 +84,7 @@ export default function TasksModal() {
                   {errors.Description && <p>{errors.Description.message  as React.ReactNode}</p>} */}
 
 
-                  <label htmlFor="current_status " className='labels'>Current Status:</label> <br/>
+                  <label htmlFor="current_status " className='labels'>Status</label> <br/>
        
                 <select id="Status"  {...register('ListID', { required: 'Status name is required' })}>
                     
@@ -105,11 +106,15 @@ export default function TasksModal() {
                 )}
 
 
-                    <button type="submit">Submit</button>
-
+                    {/* <button type="submit">Submit</button> */}
+                    <>
+                    <div className="parent-footer d-flex flex-column">
+                    <button className="boardsubmit" type="submit">Create Task</button>
+                    </div>
+                    </>
                   </form>
                 </div>
-                <div className="modal-footer"></div>
+             
               </div>
             </div>
           </div>

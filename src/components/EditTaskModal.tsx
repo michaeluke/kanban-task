@@ -117,11 +117,11 @@ export default function EditTaskModal() {
                 )}
 
 
-                <button className="boardsubmit" type="submit">Save Changes</button>
+                <button className="tasksubmit" type="submit">Save Changes</button>
 
                   </form>
                 </div>
-                <div className="modal-footer"></div>
+             
               </div>
             </div>
           </div>

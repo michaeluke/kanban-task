@@ -18,11 +18,13 @@
   font-size: 24px;
   padding-top: 2px;
   margin-bottom: 0px;
+  font-weight: 700;
 }
 .header-container .header-content .logo .platform-closed {
   font-size: 24px;
   padding-top: 2px;
   margin-bottom: 0px;
+  font-weight: 700;
 }
 .header-container .header-content .right-section .add-task-btn {
   border: none;
