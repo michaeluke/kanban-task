@@ -23,7 +23,7 @@ export default function TasksModal() {
 useEffect(() => {
 
 const htmlElement = document.documentElement;
-htmlElement.style.setProperty("--bg-color", Current_Theme === true ? "#20212C" : "#E4EBFA");
+htmlElement.style.setProperty("--bg-color", Current_Theme === true ? "#20212C" : "white");
 console.log(htmlElement.style);
 }, [Current_Theme]);
 useEffect(() => {
