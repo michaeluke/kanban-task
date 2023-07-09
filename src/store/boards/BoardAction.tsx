@@ -1,6 +1,6 @@
 import {SelectTask, UpdateTask, createBoard} from "../../api/trelloapi";
 import { Get_Boards } from "../../api/trelloapi";
-import { Board, BoardsCount, SetLastBoard, SetSelectedTask, SetTasks, SettColumnfirsttime, addBoard, show_editTaskmodal } from "./BoardSlice";
+import { Board, BoardsCount, ClearTasks, SetLastBoard, SetSelectedTask, SetTasks, Setcurrenttasks, SettColumnfirsttime, addBoard, show_editTaskmodal  } from "./BoardSlice";
 import { store } from '../store';
 import { GetBoards } from "./BoardSlice";
 import { SetCurrentBoard } from "./BoardSlice";
@@ -16,6 +16,7 @@ import { Delete_Column } from "../../api/trelloapi";
 import { Set_FirstBoard } from "./BoardSlice";
 import type { RootState } from "../store";
 import { useSelector, useDispatch } from "react-redux";
+
 //Creating a board
 export const createBoardAsync = async (boardName: any) => {
     
@@ -274,24 +275,25 @@ export const Create_Task = (Title:string , Listid:string) => {
   .then((tasks) => {
 
     
-  
     
   
-    if(Array.isArray(tasks)){
-     
-      tasks.forEach((task:any) => {
-     
-        // console.log(task)
-        store.dispatch(SetTasks(task))
-        
-  
-      });
+      if(Array.isArray(tasks)){
+      
+        tasks.forEach((task:any) => {
+       
+          // console.log(task)
+          
+          store.dispatch(SetTasks(task))
+          
+    
+        });
     }
-
     else{
+      store.dispatch(ClearTasks())
+    } 
+ 
+    
 
-      store.dispatch(SetTasks([]))
-    }
   
  
    

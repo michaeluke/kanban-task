@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import type { RootState } from '../store/store'
 import './style/Board.css'
 import { Get_Tasks_In_A_List, Select_Task, SetFirstBoard, View_Current_Board } from '../store/boards/BoardAction'
-import { hide_deletemodal, hide_editTaskmodal, set_combinedarray, show_deletemodal, show_editTaskmodal, show_editboardmodal, show_task_modal } from '../store/boards/BoardSlice'
+import { hide_deletemodal, hide_editTaskmodal, set_combinedarray, show_deletemodal, show_editTaskmodal, show_editboardmodal, show_modal, show_task_modal } from '../store/boards/BoardSlice'
 import { ClearTasks } from '../store/boards/BoardSlice'
 import { Board } from '../store/boards/BoardSlice'
 import { Get_Current_Board } from '../store/boards/BoardAction'
@@ -35,6 +35,7 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
 
     const emptyboard = useSelector((state: RootState) => state.Boards.EmptyBoard)
    
+    const currenttasks = useSelector((state: RootState) => state.Boards.tasks_now)
 
     useEffect(() => {
 
@@ -75,7 +76,7 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
       
       
       
-    }, [firstboard,show_task_modal,show_editboardmodal,show_deletemodal]);
+    }, [firstboard,show_task_modal,show_editboardmodal,show_deletemodal,show_modal]);
  
     useEffect(() => {
     
@@ -122,13 +123,16 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
 
     
       if(Array.isArray(CurrentColumns)){
+       
         
         CurrentColumns.forEach((column: any) => {
              
+       
           Get_Tasks_In_A_List(column.id);
-
+          
          });;
       }
+    
     
       }, [CurrentColumns]);
 
@@ -136,8 +140,10 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
       //create a combined array to connect between the columns and the cards.
       useEffect(()=>{
        
+        
         if(Array.isArray(CurrentColumns) && Array.isArray(Tasks) ){
 
+          
         const columns_tasks = CurrentColumns.map((column: any) => ({
           ...column,
           tasks: Tasks.filter((task: any) => task.idList === column.id)
@@ -148,7 +154,7 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
       }
 
     
-    },[CurrentColumns , Tasks ])
+    },[CurrentColumns ,Tasks ])
 
 
 
@@ -173,7 +179,7 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
         <div className='column d-flex flex-column' key={column.id}>
             
             
-            <div>{column.name}</div>
+            <div>({column.tasks.length}) {column.name}</div>
 
 
             {column.tasks && column.tasks?.map((task: any) => (
