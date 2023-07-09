@@ -45,6 +45,13 @@ import { UpdateBoardName } from '../store/boards/BoardAction'
     htmlElement.style.setProperty("--bg-color", Current_Theme === true ? "#20212C" : "#E4EBFA");
     console.log(htmlElement.style);
   }, [Current_Theme]);
+
+  useEffect(() => {
+  
+    const htmlElement = document.documentElement;
+    htmlElement.style.setProperty("--side", Current_Theme === true ? "#2B2C37" : "white");
+    console.log(htmlElement.style);
+  }, [Current_Theme]);
   useEffect(() => {
   
     const htmlElement = document.documentElement;

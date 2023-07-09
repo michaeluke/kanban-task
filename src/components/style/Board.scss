@@ -1,5 +1,6 @@
 :root {
-    --bg-color: #E4EBFA;
+    --bg-color: white;
+    --side : white
   }
 
 .Board{
@@ -14,7 +15,7 @@
         gap: 20px ;
 
         .card{
-            background-color: var(--bg-color);
+            background-color: var(--side);
             margin-right: 40px;
             .card-title{
                 font-weight: 700;
